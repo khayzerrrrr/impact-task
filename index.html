@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,217 +17,43 @@
       <span class="bg-grid"></span>
     </div>
 
-    <div class="app-shell">
+    <div class="app-shell" id="app-shell">
       <span class="shell-glow" aria-hidden="true"></span>
-      <div class="screen">
-        <div class="status-bar">
-          <span>9:41</span>
-          <div class="signal-group">
-            <span class="signal-dot"></span>
-            <span class="signal-dot"></span>
-            <span class="signal-dot"></span>
-          </div>
+
+      <div class="status-bar">
+        <span>9:41</span>
+        <div class="signal-group">
+          <span class="signal-dot"></span>
+          <span class="signal-dot"></span>
+          <span class="signal-dot"></span>
         </div>
-
-        <header class="topbar">
-          <div>
-            <div class="eyebrow">Friday · 29 Aug</div>
-            <h1>Impact<span class="dot-accent">.</span></h1>
-          </div>
-          <button class="add-button" type="button" aria-label="Add task">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 2.5V15.5M2.5 9H15.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
-            </svg>
-          </button>
-        </header>
-
-        <section class="quick-pills">
-          <div class="pill danger"><span class="pulse"></span>4 monsters loose</div>
-          <div class="pill"><span class="pulse success"></span>6 Gains tracked</div>
-        </section>
-
-        <section class="hero-card">
-          <div class="hero-header">
-            <div>
-              <div class="eyebrow">Threat forecast</div>
-              <h2 id="monster-name">Goblin</h2>
-            </div>
-            <span class="tier-badge" id="tier-pill">Tier 4</span>
-          </div>
-
-          <div class="hero-body">
-            <div class="monster-wrap">
-              <span class="monster-ring"></span>
-              <div class="monster" id="monster-avatar">
-                <span class="horn left"></span>
-                <span class="horn right"></span>
-                <span class="eye left"></span>
-                <span class="eye right"></span>
-                <span class="snout"></span>
-              </div>
-            </div>
-
-            <div class="mini-stats">
-              <div>
-                <span>State</span>
-                <strong id="monster-state">Awake</strong>
-              </div>
-              <div>
-                <span>Score</span>
-                <strong id="monster-score">80</strong>
-              </div>
-              <div>
-                <span>EXP</span>
-                <strong id="monster-exp">88</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="slider-block">
-            <div class="slider-row">
-              <label for="difficulty">Difficulty</label>
-              <strong id="difficulty-value">58</strong>
-            </div>
-            <input id="difficulty" type="range" min="0" max="100" value="58" />
-          </div>
-
-          <div class="slider-block">
-            <div class="slider-row">
-              <label for="impact">Impact</label>
-              <strong id="impact-value">42</strong>
-            </div>
-            <input id="impact" type="range" min="0" max="100" value="42" />
-          </div>
-        </section>
-
-        <section class="balance-card">
-          <div class="card-title-row">
-            <div>
-              <div class="eyebrow">Gains</div>
-              <h3>Balance</h3>
-            </div>
-            <span class="live-pill"><span class="live-dot"></span>live</span>
-          </div>
-
-          <div class="radar-panel">
-            <div class="radar-chart">
-              <span class="ring ring-1"></span>
-              <span class="ring ring-2"></span>
-              <span class="ring ring-3"></span>
-              <span class="ring ring-4"></span>
-              <span class="radar-shape" id="radar-shape"></span>
-              <span class="radar-core"></span>
-            </div>
-
-            <div class="gains-grid">
-              <span>Raga</span>
-              <span>Nalar</span>
-              <span>Karya</span>
-              <span>Harta</span>
-              <span>Ikatan</span>
-              <span>Jiwa</span>
-            </div>
-          </div>
-        </section>
-
-        <section class="module-card" id="gains-module">
-          <div class="card-title-row">
-            <div>
-              <div class="eyebrow">Module</div>
-              <h3>Gains</h3>
-            </div>
-            <button class="filter-btn">View</button>
-          </div>
-
-          <div class="gain-overview" id="gain-overview"></div>
-        </section>
-
-        <section class="tasks">
-          <div class="card-title-row">
-            <div>
-              <div class="eyebrow">Priority</div>
-              <h3>Task queue</h3>
-            </div>
-            <button class="filter-btn">All</button>
-          </div>
-
-          <div class="task-list" id="task-list"></div>
-        </section>
-
-        <section class="module-card" id="task-detail-module">
-          <div class="card-title-row">
-            <div>
-              <div class="eyebrow">Module</div>
-              <h3>Task detail</h3>
-            </div>
-            <button class="filter-btn" id="toggle-detail">Open</button>
-          </div>
-
-          <div class="detail-shell">
-            <div class="detail-header">
-              <span class="detail-badge" id="detail-gain">Harta</span>
-              <span class="detail-state" id="detail-state">Alert</span>
-            </div>
-
-            <h4 id="detail-title">Bayar tagihan listrik</h4>
-
-            <div class="detail-metrics">
-              <div>
-                <span>Due</span>
-                <strong id="detail-due">Tonight</strong>
-              </div>
-              <div>
-                <span>Threat</span>
-                <strong id="detail-threat">Tier 4</strong>
-              </div>
-              <div>
-                <span>EXP</span>
-                <strong id="detail-exp">88</strong>
-              </div>
-            </div>
-
-            <div class="gain-allocation" id="gain-allocation"></div>
-          </div>
-        </section>
-
-        <section class="module-card" id="quick-add-module">
-          <div class="card-title-row">
-            <div>
-              <div class="eyebrow">Module</div>
-              <h3>Create task</h3>
-            </div>
-            <button class="filter-btn" type="button" id="quick-add-toggle">Add</button>
-          </div>
-
-          <form class="quick-add-form" id="quick-add-form">
-            <label>
-              <span>Task title</span>
-              <input id="new-task-title" type="text" value="Membaca buku 20 menit" />
-            </label>
-            <label>
-              <span>Primary Gain</span>
-              <select id="new-task-gain">
-                <option>Raga</option>
-                <option>Nalar</option>
-                <option>Karya</option>
-                <option>Harta</option>
-                <option>Ikatan</option>
-                <option>Jiwa</option>
-              </select>
-            </label>
-            <label>
-              <span>Due</span>
-              <select id="new-task-due">
-                <option>Tonight</option>
-                <option>Tomorrow</option>
-                <option>This week</option>
-                <option>Later</option>
-              </select>
-            </label>
-            <button type="submit" class="primary-action">Create task</button>
-          </form>
-        </section>
       </div>
+
+      <main id="view-root" class="view-root"></main>
+
+      <nav class="bottom-nav" id="bottom-nav" aria-label="Navigasi utama">
+        <button type="button" class="nav-btn" data-nav="home" aria-label="Beranda">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 11.5 12 4l8 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10v9.5a.5.5 0 0 0 .5.5H10v-5a2 2 0 0 1 4 0v5h3.5a.5.5 0 0 0 .5-.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <small>Beranda</small>
+        </button>
+        <button type="button" class="nav-btn" data-nav="tasks" aria-label="Daftar task">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M8 6h11M8 12h11M8 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M4 6h.01M4 12h.01M4 18h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <small>Tasks</small>
+        </button>
+        <button type="button" class="nav-btn nav-btn-cta" data-nav="create" aria-label="Buat task">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        </button>
+        <button type="button" class="nav-btn" data-nav="bestiary" aria-label="Bestiary">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3c-4 0-7 3.2-7 8v8.2c0 .5.6.8 1 .4l1.8-1.6 1.8 1.6c.2.2.6.2.8 0l1.6-1.6 1.6 1.6c.2.2.6.2.8 0l1.8-1.6 1.8 1.6c.4.4 1 .1 1-.4V11c0-4.8-3-8-7-8Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="9.3" cy="10.5" r="1.1" fill="currentColor"/><circle cx="14.7" cy="10.5" r="1.1" fill="currentColor"/></svg>
+          <small>Bestiary</small>
+        </button>
+        <button type="button" class="nav-btn" data-nav="stats" aria-label="Statistik">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 19V10M12 19V5M19 19v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <small>Statistik</small>
+        </button>
+      </nav>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </div>
 
     <script src="app.js"></script>
