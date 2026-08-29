@@ -2,6 +2,7 @@ package com.impacttask
 
 import java.time.Duration
 import java.time.LocalDateTime
+import kotlin.math.roundToInt
 
 enum class Gain(val label: String) {
     RAGA("Raga"),
@@ -61,9 +62,10 @@ object TaskCalculator {
         return (impact * 1.0) + (difficulty * 0.7)
     }
 
-    fun balanceMultiplier(gainLevels: Map<Gain, Int>): Double {
-        val lowestLevel = gainLevels.values.minOrNull() ?: 0
-        return if (lowestLevel <= 0) 1.0 else 1.15
+    fun balanceMultiplier(targetGain: Gain, gainLevels: Map<Gain, Int>): Double {
+        val lowestLevel = gainLevels.values.minOrNull() ?: return 1.0
+        val isLowest = (gainLevels[targetGain] ?: lowestLevel) == lowestLevel
+        return if (isLowest) 1.15 else 1.0
     }
 
     fun distributeExperience(total: Int, allocations: Map<Gain, Int>): Map<Gain, Int> {
@@ -71,10 +73,8 @@ object TaskCalculator {
         if (normalized.isEmpty()) return emptyMap()
 
         val totalAllocation = normalized.values.sum()
-        return normalized.mapValues { (gain, percent) ->
-            ((total * percent.toDouble()) / totalAllocation.toDouble()).toInt().also {
-                require(gain in Gain.entries)
-            }
+        return normalized.mapValues { (_, percent) ->
+            ((total * percent.toDouble()) / totalAllocation.toDouble()).roundToInt()
         }
     }
 }

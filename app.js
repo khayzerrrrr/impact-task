@@ -96,6 +96,8 @@ function updateMonster() {
 
   difficultyValue.textContent = difficulty;
   impactValue.textContent = impact;
+  difficultyInput.style.setProperty('--_pct', `${difficulty}%`);
+  impactInput.style.setProperty('--_pct', `${impact}%`);
   monsterName.textContent = tier.name;
   tierPill.textContent = `Tier ${tierNumber}`;
   monsterState.textContent = tier.state;
@@ -146,7 +148,7 @@ function renderTaskDetail() {
   detailTitle.textContent = task.title;
   detailDue.textContent = task.due;
   detailThreat.textContent = task.threat;
-  detailExp.textContent = String(Math.round((Number(difficultyInput.value) * 1.0) + (Number(impactInput.value) * 0.7)));
+  detailExp.textContent = String(Math.round((Number(impactInput.value) * 1.0) + (Number(difficultyInput.value) * 0.7)));
   renderGainAllocation(task);
 }
 
@@ -218,6 +220,11 @@ quickAddForm.addEventListener('submit', event => {
   const gain = newTaskGain.value || 'Nalar';
   const due = newTaskDue.value || 'Tonight';
 
+  const secondaryGains = Object.keys(gainMeta).filter(name => name !== gain).slice(0, 2);
+  const allocation = { [gain]: 70 };
+  if (secondaryGains[0]) allocation[secondaryGains[0]] = 20;
+  if (secondaryGains[1]) allocation[secondaryGains[1]] = 10;
+
   tasks.unshift({
     title,
     icon: gainMeta[gain]?.glyph || 'T',
@@ -225,7 +232,7 @@ quickAddForm.addEventListener('submit', event => {
     state: 'Calm',
     gain,
     due,
-    allocation: { [gain]: 70, Jiwa: 20, Nalar: 10 },
+    allocation,
     threat: 'Tier 3'
   });
 

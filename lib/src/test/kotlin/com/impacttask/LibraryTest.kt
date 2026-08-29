@@ -44,19 +44,35 @@ class ImpactTaskDomainTest {
     }
 
     @Test
-    fun `gain balancing bonus rewards the lowest progress gain`() {
-        val multiplier = TaskCalculator.balanceMultiplier(
-            gainLevels = mapOf(
-                Gain.RAGA to 12,
-                Gain.NALAR to 8,
-                Gain.KARYA to 18,
-                Gain.HARTA to 9,
-                Gain.IKATAN to 7,
-                Gain.JIWA to 14,
-            )
+    fun `gain balancing bonus rewards only the lowest progress gain`() {
+        val gainLevels = mapOf(
+            Gain.RAGA to 12,
+            Gain.NALAR to 8,
+            Gain.KARYA to 18,
+            Gain.HARTA to 9,
+            Gain.IKATAN to 7,
+            Gain.JIWA to 14,
         )
 
-        assertTrue(multiplier > 1.0)
-        assertEquals(1.15, multiplier, 0.0001)
+        val lowestGainMultiplier = TaskCalculator.balanceMultiplier(Gain.IKATAN, gainLevels)
+        val otherGainMultiplier = TaskCalculator.balanceMultiplier(Gain.KARYA, gainLevels)
+
+        assertTrue(lowestGainMultiplier > otherGainMultiplier)
+        assertEquals(1.15, lowestGainMultiplier, 0.0001)
+        assertEquals(1.00, otherGainMultiplier, 0.0001)
+    }
+
+    @Test
+    fun `exp distribution rounds shares instead of truncating them`() {
+        val allocations = mapOf(
+            Gain.RAGA to 1,
+            Gain.NALAR to 1,
+        )
+
+        // 7 * (1/2) = 3.5 per gain: round() gives 4, a naive truncation would give 3.
+        val expByGain = TaskCalculator.distributeExperience(7, allocations)
+
+        assertEquals(4, expByGain[Gain.RAGA])
+        assertEquals(4, expByGain[Gain.NALAR])
     }
 }
