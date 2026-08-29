@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Fase 2: notifications, exact-time alarms for Terjadwal tasks, and the
+         focus-session foreground service. See prd.md section 08 "Yang harus
+         diurus di sisi Android" for why each of these exists. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Requested via the Settings deep link (SettingsScreen), not a runtime
+         dialog -- see prd.md section 08. Deliberately not USE_EXACT_ALARM,
+         which requires a stricter Play Console "core use case" declaration. -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
     <application
         android:name=".ImpactTaskApp"
         android:allowBackup="true"
@@ -19,6 +32,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Lock-screen visibility (showWhenLocked/turnScreenOn) is set at
+             runtime in AlarmActivity.onCreate(), not here -- there is no such
+             manifest attribute; see Activity#setShowWhenLocked/#setTurnScreenOn. -->
+        <activity
+            android:name=".alarm.AlarmActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.ImpactTask" />
+
+        <receiver
+            android:name=".alarm.ScheduledAlarmReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name=".alarm.BootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".focus.FocusSessionService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="focus_timer_session" />
+        </service>
+
     </application>
 
 </manifest>

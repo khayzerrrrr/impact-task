@@ -4,6 +4,7 @@ sealed class ImpactDestination(val route: String) {
     data object Tasks : ImpactDestination("tasks")
     data object Gains : ImpactDestination("gains")
     data object Create : ImpactDestination("create")
+    data object Settings : ImpactDestination("settings")
     data object TaskDetail : ImpactDestination("task/{taskId}") {
         const val ARG_TASK_ID = "taskId"
         fun route(taskId: String) = "task/$taskId"

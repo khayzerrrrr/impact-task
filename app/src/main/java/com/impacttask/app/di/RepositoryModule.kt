@@ -4,6 +4,8 @@ import com.impacttask.app.data.identity.LocalOwnerIdProvider
 import com.impacttask.app.data.identity.OwnerIdProvider
 import com.impacttask.app.data.repository.GainRepository
 import com.impacttask.app.data.repository.GainRepositoryImpl
+import com.impacttask.app.data.repository.NotificationSettingsRepository
+import com.impacttask.app.data.repository.NotificationSettingsRepositoryImpl
 import com.impacttask.app.data.repository.TaskRepository
 import com.impacttask.app.data.repository.TaskRepositoryImpl
 import dagger.Binds
@@ -20,6 +22,11 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindGainRepository(impl: GainRepositoryImpl): GainRepository
+
+    @Binds
+    abstract fun bindNotificationSettingsRepository(
+        impl: NotificationSettingsRepositoryImpl,
+    ): NotificationSettingsRepository
 
     /** Swapped for a Firebase-Auth-backed implementation in Fase 2. */
     @Binds

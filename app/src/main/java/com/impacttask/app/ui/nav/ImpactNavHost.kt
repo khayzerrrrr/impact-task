@@ -23,6 +23,7 @@ import androidx.navigation.navArgument
 import com.impacttask.app.ui.create.CreateTaskScreen
 import com.impacttask.app.ui.detail.TaskDetailScreen
 import com.impacttask.app.ui.gains.GainsScreen
+import com.impacttask.app.ui.settings.SettingsScreen
 import com.impacttask.app.ui.tasks.TaskListScreen
 
 @Composable
@@ -85,10 +86,14 @@ fun ImpactNavHost() {
                 TaskListScreen(
                     onOpenTask = { id -> navController.navigate(ImpactDestination.TaskDetail.route(id)) },
                     onCreateTask = { navController.navigate(ImpactDestination.Create.route) },
+                    onOpenSettings = { navController.navigate(ImpactDestination.Settings.route) },
                 )
             }
             composable(ImpactDestination.Gains.route) {
                 GainsScreen()
+            }
+            composable(ImpactDestination.Settings.route) {
+                SettingsScreen(onBack = { navController.popBackStack() })
             }
             composable(ImpactDestination.Create.route) {
                 CreateTaskScreen(

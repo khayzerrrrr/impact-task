@@ -73,15 +73,19 @@ dependencies {
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
-    // Local anonymous ownerId (Fase 1) -- swapped for Firebase Auth in Fase 2.
+    // WorkManager (periodic monster-state checks) + its Hilt integration
+    // (@HiltWorker), and DataStore for local settings/identity.
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.hilt.work)
+    kapt(libs.androidx.hilt.compiler)
 
-    // Fase 2: Google Sign-In / email+OTP / Firestore sync / AlarmManager+WorkManager
-    // notifications. Uncomment alongside the google-services plugin above.
+    // Fase 2 account/sync only: Google Sign-In / email+OTP / Firestore sync.
+    // Uncomment alongside the google-services plugin above once
+    // app/google-services.json exists.
     // implementation(platform(libs.firebase.bom))
     // implementation(libs.firebase.auth.ktx)
     // implementation(libs.androidx.credentials)
     // implementation(libs.androidx.credentials.play.services.auth)
     // implementation(libs.googleid)
-    // implementation(libs.androidx.work.runtime.ktx)
 }

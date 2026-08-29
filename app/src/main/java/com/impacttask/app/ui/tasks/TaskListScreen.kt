@@ -16,13 +16,17 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -39,15 +43,27 @@ import com.impacttask.app.ui.components.number
 import com.impacttask.app.ui.components.tone
 import com.impacttask.app.util.formatDue
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskListScreen(
     onOpenTask: (String) -> Unit,
     onCreateTask: () -> Unit,
+    onOpenSettings: () -> Unit,
     viewModel: TaskListViewModel = hiltViewModel(),
 ) {
     val tasks by viewModel.tasks.collectAsState()
 
     Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Impact Task") },
+                actions = {
+                    IconButton(onClick = onOpenSettings) {
+                        Icon(Icons.Filled.Settings, contentDescription = "Setelan")
+                    }
+                },
+            )
+        },
         floatingActionButton = {
             FloatingActionButton(onClick = onCreateTask) {
                 Icon(Icons.Filled.Add, contentDescription = "Buat task")

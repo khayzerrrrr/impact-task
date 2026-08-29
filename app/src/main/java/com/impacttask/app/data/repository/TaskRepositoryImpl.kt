@@ -3,6 +3,7 @@ package com.impacttask.app.data.repository
 import androidx.room.withTransaction
 import com.impacttask.Gain
 import com.impacttask.TaskCalculator
+import com.impacttask.app.alarm.AlarmScheduler
 import com.impacttask.app.data.db.ExpLedgerDao
 import com.impacttask.app.data.db.GainDao
 import com.impacttask.app.data.db.ImpactDatabase
@@ -16,6 +17,7 @@ import com.impacttask.app.data.db.entity.TaskEntity
 import com.impacttask.app.data.db.entity.TaskGainEntity
 import com.impacttask.app.data.identity.OwnerIdProvider
 import com.impacttask.app.data.model.TaskStatus
+import com.impacttask.app.data.model.TaskTimeType
 import com.impacttask.app.domain.model.NewTaskInput
 import com.impacttask.app.domain.model.SubtaskUi
 import com.impacttask.app.domain.model.TaskUi
@@ -38,6 +40,7 @@ class TaskRepositoryImpl @Inject constructor(
     private val gainDao: GainDao,
     private val ledgerDao: ExpLedgerDao,
     private val ownerIdProvider: OwnerIdProvider,
+    private val alarmScheduler: AlarmScheduler,
 ) : TaskRepository {
 
     override fun observeTasks(): Flow<List<TaskUi>> = flow {
@@ -67,6 +70,11 @@ class TaskRepositoryImpl @Inject constructor(
             taskDao.upsertTask(task)
             taskDao.upsertAllocations(allocations)
         }
+
+        if (input.timeType == TaskTimeType.TERJADWAL && input.dueAt != null) {
+            observeTask(task.id).first()?.let(alarmScheduler::scheduleFor)
+        }
+
         return task.id
     }
 
@@ -134,6 +142,7 @@ class TaskRepositoryImpl @Inject constructor(
                 ),
             )
         }
+        alarmScheduler.cancelFor(taskId)
     }
 
     override suspend fun cancelTask(taskId: String) {
@@ -147,6 +156,7 @@ class TaskRepositoryImpl @Inject constructor(
                 updatedAt = now.toEpochMillis(),
             ),
         )
+        alarmScheduler.cancelFor(taskId)
     }
 
     private fun TaskWithDetails.toUi(): TaskUi = TaskUi(

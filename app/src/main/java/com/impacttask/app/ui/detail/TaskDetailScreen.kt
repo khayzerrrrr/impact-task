@@ -54,6 +54,7 @@ fun TaskDetailScreen(
     viewModel: TaskDetailViewModel = hiltViewModel(),
 ) {
     val task by viewModel.task.collectAsState()
+    val sessionRunning by viewModel.sessionRunning.collectAsState()
 
     Scaffold(
         topBar = {
@@ -81,6 +82,25 @@ fun TaskDetailScreen(
             modifier = Modifier.fillMaxWidth().padding(padding),
         ) {
             item { TaskHeroCard(current) }
+
+            if (current.status == TaskStatus.ACTIVE) {
+                item {
+                    Card(modifier = Modifier.fillMaxWidth()) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth().padding(16.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Text(if (sessionRunning) "Sesi fokus berjalan" else "Sesi fokus belum mulai")
+                            Button(onClick = {
+                                if (sessionRunning) viewModel.stopFocusSession() else viewModel.startFocusSession()
+                            }) {
+                                Text(if (sessionRunning) "Selesai sesi" else "Mulai")
+                            }
+                        }
+                    }
+                }
+            }
 
             if (current.notes.isNotBlank()) {
                 item {

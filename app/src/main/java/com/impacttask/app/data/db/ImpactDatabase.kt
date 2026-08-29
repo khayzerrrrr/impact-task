@@ -5,6 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.impacttask.app.data.db.entity.ExpLedgerEntity
 import com.impacttask.app.data.db.entity.GainEntity
+import com.impacttask.app.data.db.entity.MonsterEntity
 import com.impacttask.app.data.db.entity.SubtaskEntity
 import com.impacttask.app.data.db.entity.TaskEntity
 import com.impacttask.app.data.db.entity.TaskGainEntity
@@ -16,6 +17,7 @@ import com.impacttask.app.data.db.entity.TaskGainEntity
         SubtaskEntity::class,
         TaskGainEntity::class,
         ExpLedgerEntity::class,
+        MonsterEntity::class,
     ],
     version = 1,
     exportSchema = true,
@@ -25,4 +27,5 @@ abstract class ImpactDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
     abstract fun gainDao(): GainDao
     abstract fun expLedgerDao(): ExpLedgerDao
+    abstract fun monsterDao(): MonsterDao
 }
