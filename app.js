@@ -8,16 +8,16 @@
 const NOW = new Date();
 
 const TIERS = [
-  { num: 1, min: 0, max: 19, name: 'Speck', shape: 'dust' },
-  { num: 2, min: 20, max: 39, name: 'Blob', shape: 'blob' },
-  { num: 3, min: 40, max: 59, name: 'Imp', shape: 'imp' },
-  { num: 4, min: 60, max: 79, name: 'Goblin', shape: 'goblin' },
-  { num: 5, min: 80, max: 99, name: 'Brute', shape: 'brute' },
-  { num: 6, min: 100, max: 119, name: 'Stalker', shape: 'stalker' },
-  { num: 7, min: 120, max: 139, name: 'Warden', shape: 'warden' },
-  { num: 8, min: 140, max: 159, name: 'Behemoth', shape: 'behemoth' },
-  { num: 9, min: 160, max: 179, name: 'Wraith', shape: 'wraith' },
-  { num: 10, min: 180, max: 200, name: 'Titan', shape: 'titan' }
+  { num: 1, min: 0, max: 19, name: 'Speck', shape: 'dust', a: '#bff4e6', b: '#5eead4', glow: '94,234,212', fangs: false, spikes: false, tail: false },
+  { num: 2, min: 20, max: 39, name: 'Blob', shape: 'blob', a: '#c9f2c2', b: '#7bd66a', glow: '123,214,106', fangs: false, spikes: false, tail: false },
+  { num: 3, min: 40, max: 59, name: 'Imp', shape: 'imp', a: '#ffe4a8', b: '#fbbf24', glow: '251,191,36', fangs: true, spikes: false, tail: true },
+  { num: 4, min: 60, max: 79, name: 'Goblin', shape: 'goblin', a: '#ffd0a3', b: '#fb923c', glow: '251,146,60', fangs: true, spikes: false, tail: true },
+  { num: 5, min: 80, max: 99, name: 'Brute', shape: 'brute', a: '#ffb4a3', b: '#f97066', glow: '249,112,102', fangs: true, spikes: true, tail: false },
+  { num: 6, min: 100, max: 119, name: 'Stalker', shape: 'stalker', a: '#ffb0c4', b: '#fb7185', glow: '251,113,133', fangs: true, spikes: true, tail: true },
+  { num: 7, min: 120, max: 139, name: 'Warden', shape: 'warden', a: '#e3b8ff', b: '#c084fc', glow: '192,132,252', fangs: true, spikes: true, tail: false },
+  { num: 8, min: 140, max: 159, name: 'Behemoth', shape: 'behemoth', a: '#c7b8ff', b: '#a78bfa', glow: '167,139,250', fangs: true, spikes: true, tail: false },
+  { num: 9, min: 160, max: 179, name: 'Wraith', shape: 'wraith', a: '#aeb9ff', b: '#818cf8', glow: '129,140,248', fangs: true, spikes: true, tail: true },
+  { num: 10, min: 180, max: 200, name: 'Titan', shape: 'titan', a: '#9ad4ff', b: '#60a5fa', glow: '96,165,250', fangs: true, spikes: true, tail: true }
 ];
 
 const GAINS = [
@@ -171,6 +171,42 @@ const state = {
       id: 't8', title: 'Nabung dana darurat bulan ini', notes: '',
       difficulty: 25, impact: 65, due: hoursFromNow(90), type: 'bertenggat', estMinutes: 20,
       allocations: { harta: 90, jiwa: 10 }, subtasks: [], status: 'active', createdAt: hoursFromNow(-60)
+    },
+    {
+      id: 't9', title: 'Review kontrak vendor', notes: '',
+      difficulty: 45, impact: 60, due: null, type: 'lentur', estMinutes: 40,
+      allocations: { karya: 100 }, subtasks: [], status: 'done', createdAt: hoursFromNow(-72),
+      completedAt: hoursFromNow(-50), expAwarded: 120
+    },
+    {
+      id: 't10', title: 'Beres-beres kamar', notes: '',
+      difficulty: 15, impact: 20, due: null, type: 'lentur', estMinutes: 25,
+      allocations: { raga: 100 }, subtasks: [], status: 'done', createdAt: hoursFromNow(-30),
+      completedAt: hoursFromNow(-22), expAwarded: 45
+    },
+    {
+      id: 't11', title: 'Daftar workshop desain', notes: '',
+      difficulty: 20, impact: 30, due: null, type: 'lentur', estMinutes: 10,
+      allocations: { karya: 100 }, subtasks: [], status: 'cancelled', createdAt: hoursFromNow(-96),
+      cancelledAt: hoursFromNow(-70)
+    },
+    {
+      id: 't12', title: 'Meditasi pagi', notes: '',
+      difficulty: 10, impact: 15, due: null, type: 'lentur', estMinutes: 15,
+      allocations: { jiwa: 100 }, subtasks: [], status: 'done', createdAt: hoursFromNow(-6),
+      completedAt: hoursFromNow(-4), expAwarded: 30
+    },
+    {
+      id: 't13', title: 'Utang ke teman dilunasi', notes: '',
+      difficulty: 10, impact: 78, due: null, type: 'lentur', estMinutes: 5,
+      allocations: { harta: 70, ikatan: 30 }, subtasks: [], status: 'done', createdAt: hoursFromNow(-124),
+      completedAt: hoursFromNow(-118), expAwarded: 88
+    },
+    {
+      id: 't14', title: 'Ikut lomba lari virtual', notes: '',
+      difficulty: 30, impact: 25, due: null, type: 'lentur', estMinutes: 60,
+      allocations: { raga: 100 }, subtasks: [], status: 'cancelled', createdAt: hoursFromNow(-150),
+      cancelledAt: hoursFromNow(-142)
     }
   ],
   bestiary: {
@@ -190,8 +226,10 @@ const state = {
   ui: {
     authenticated: false,
     taskFilter: 'all',
+    logFilter: 'all',
     createForm: { primaryGain: 'raga', secondaryGain: '', secondaryPct: 0, tertiaryGain: '', tertiaryPct: 0, split: false, difficulty: 50, impact: 50, type: 'bertenggat' },
-    timer: null
+    timer: null,
+    agent: { messages: [], thinking: false }
   }
 };
 
@@ -245,6 +283,26 @@ function formatDue(due) {
   return `${Math.round(diffH / 24)} hari lagi`;
 }
 
+const DAY_NAMES = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', "Jumat", 'Sabtu'];
+const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+
+function dayKey(date) {
+  return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+}
+
+function formatLogDateHeading(date) {
+  const today = dayKey(NOW);
+  const yesterday = dayKey(new Date(NOW.getTime() - 86400000));
+  const key = dayKey(date);
+  if (key === today) return 'Hari ini';
+  if (key === yesterday) return 'Kemarin';
+  return `${DAY_NAMES[date.getDay()]}, ${date.getDate()} ${MONTH_NAMES[date.getMonth()]}`;
+}
+
+function formatClockTime(date) {
+  return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+}
+
 function icon(name, size = 18) {
   const paths = {
     back: '<path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
@@ -255,7 +313,10 @@ function icon(name, size = 18) {
     download: '<path d="M12 3v12m0 0-4-4m4 4 4-4M5 19h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
     lock: '<rect x="5" y="10.5" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" stroke="currentColor" stroke-width="1.7" fill="none"/>',
     flame: '<path d="M12 2c1 3-2.5 4-2.5 7.2A2.5 2.5 0 0 0 12 11.7a2.5 2.5 0 0 0 2.5-2.5c0-1-.5-1.6-.5-1.6 2 1 3.5 3.6 3.5 6.1a5.5 5.5 0 1 1-11 0c0-3.6 2.5-5 3.5-7 .5-1 1.5-2.5 2-4.7Z" stroke="currentColor" stroke-width="1.5" fill="none"/>',
-    google: '<path d="M21 12.2c0-.7-.06-1.4-.18-2H12v3.8h5.1a4.4 4.4 0 0 1-1.9 2.9v2.4h3a9 9 0 0 0 2.8-6.6Z" fill="#4285F4"/><path d="M12 21c2.4 0 4.5-.8 6-2.2l-3-2.4c-.8.6-1.9.9-3 .9-2.3 0-4.3-1.6-5-3.7H4v2.4A9 9 0 0 0 12 21Z" fill="#34A853"/><path d="M7 13.6a5.4 5.4 0 0 1 0-3.4V7.8H4a9 9 0 0 0 0 8.2l3-2.4Z" fill="#FBBC05"/><path d="M12 6.6c1.3 0 2.5.4 3.4 1.3l2.6-2.6A9 9 0 0 0 4 7.8l3 2.4c.7-2.1 2.7-3.6 5-3.6Z" fill="#EA4335"/>'
+    google: '<path d="M21 12.2c0-.7-.06-1.4-.18-2H12v3.8h5.1a4.4 4.4 0 0 1-1.9 2.9v2.4h3a9 9 0 0 0 2.8-6.6Z" fill="#4285F4"/><path d="M12 21c2.4 0 4.5-.8 6-2.2l-3-2.4c-.8.6-1.9.9-3 .9-2.3 0-4.3-1.6-5-3.7H4v2.4A9 9 0 0 0 12 21Z" fill="#34A853"/><path d="M7 13.6a5.4 5.4 0 0 1 0-3.4V7.8H4a9 9 0 0 0 0 8.2l3-2.4Z" fill="#FBBC05"/><path d="M12 6.6c1.3 0 2.5.4 3.4 1.3l2.6-2.6A9 9 0 0 0 4 7.8l3 2.4c.7-2.1 2.7-3.6 5-3.6Z" fill="#EA4335"/>',
+    sparkle: '<path d="M12 3.5 13.6 9l5.4 1.6-5.4 1.6L12 17.7l-1.6-5.5L5 10.6 10.4 9 12 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><path d="M19 15.5 19.7 18l2.3.7-2.3.7-.7 2.4-.7-2.4-2.3-.7 2.3-.7.7-2.4Z" fill="currentColor"/>',
+    send: '<path d="M4 12 20 4l-6 16-3-6-7-2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" fill="none"/>',
+    ban: '<circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="m7 7 10 10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>'
   };
   return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" aria-hidden="true">${paths[name] || ''}</svg>`;
 }
@@ -267,22 +328,40 @@ function icon(name, size = 18) {
 function monsterFragment(task, { size = 132, extraClass = '' } = {}) {
   const score = clamp(task.difficulty + task.impact, 0, 200);
   const tier = tierFromScore(score);
-  const monsterState = monsterStateFromDue(task.due, NOW);
+  const monsterState = task.status && task.status !== 'active'
+    ? (task.status === 'done' ? 'defeated' : 'released')
+    : monsterStateFromDue(task.due, NOW);
   const scale = 0.82 + (score / 200) * 0.8;
   const angle = (score / 200) * 14 - 7;
   const tierIdx = tier.num - 1;
   const running = state.ui.timer && state.ui.timer.taskId === task.id;
+  const angry = monsterState === 'rampage' || monsterState === 'feral';
+
+  const spikeCount = tier.spikes ? Math.min(5, 3 + Math.floor(tierIdx / 2)) : 0;
+  const spikes = Array.from({ length: spikeCount }, (_, i) => {
+    const t = spikeCount === 1 ? 0.5 : i / (spikeCount - 1);
+    return `<span class="spike" style="--spike-pos:${(18 + t * 64).toFixed(1)}%;--spike-h:${(10 + (i % 2) * 4).toFixed(0)}px"></span>`;
+  }).join('');
+
   return `
     <div class="monster-wrap" style="--monster-size:${size}px">
       <span class="monster-ring"></span>
+      <span class="monster-shadow" style="background:radial-gradient(circle, rgba(${tier.glow},0.55), transparent 70%)"></span>
       <div class="monster shape-${tier.shape} ${monsterState} ${running ? 'restrained' : ''} ${extraClass}"
         style="--monster-scale:${scale.toFixed(3)};--monster-tilt:${angle.toFixed(1)}deg;
+               --grad-a:${tier.a};--grad-b:${tier.b};--glow-rgb:${tier.glow};
                --horn-left-rotation:${(-14 - score / 18).toFixed(1)}deg;--horn-right-rotation:${(14 + score / 18).toFixed(1)}deg;
-               --eye-size:${(22 - tierIdx * 0.9).toFixed(1)}px;--eye-offset:${(34 - tierIdx * 0.8).toFixed(1)}px;
-               --snout-width:${(42 + tierIdx * 3.5).toFixed(1)}px;--snout-height:${(18 + tierIdx * 0.8).toFixed(1)}px;">
+               --eye-size:${(23 - tierIdx * 0.9).toFixed(1)}px;--eye-offset:${(34 - tierIdx * 0.8).toFixed(1)}px;
+               --snout-width:${(40 + tierIdx * 3.2).toFixed(1)}px;--snout-height:${(16 + tierIdx * 0.7).toFixed(1)}px;">
+        <span class="monster-rim"></span>
+        ${tier.spikes ? `<span class="spike-row">${spikes}</span>` : ''}
         <span class="horn left"></span><span class="horn right"></span>
-        <span class="eye left"></span><span class="eye right"></span>
+        ${tier.tail ? '<span class="tail"></span>' : ''}
+        <span class="brow left"></span><span class="brow right"></span>
+        <span class="eye left ${angry ? 'angry' : ''}"><span class="pupil"></span></span>
+        <span class="eye right ${angry ? 'angry' : ''}"><span class="pupil"></span></span>
         <span class="snout"></span>
+        ${tier.fangs ? '<span class="fang left"></span><span class="fang right"></span>' : ''}
         ${running ? '<span class="restrain-badge">⛓</span>' : ''}
       </div>
     </div>`;
@@ -403,7 +482,10 @@ function viewHome() {
         <div class="eyebrow">Jumat · 29 Agu</div>
         <h1>Impact<span class="dot-accent">.</span></h1>
       </div>
-      <button class="icon-btn" type="button" data-action="go" data-route="settings" aria-label="Setelan">${icon('gear', 20)}</button>
+      <div class="header-actions">
+        <button class="icon-btn accent" type="button" data-action="go" data-route="agent" aria-label="AI Agent">${icon('sparkle', 18)}</button>
+        <button class="icon-btn" type="button" data-action="go" data-route="settings" aria-label="Setelan">${icon('gear', 20)}</button>
+      </div>
     </div>
 
     <section class="quick-pills">
@@ -478,6 +560,71 @@ function viewTasks() {
     </div>
 
     <div class="task-list roomy">${list.map(t => taskListItem(t)).join('') || emptyState('Tidak ada task pada filter ini.')}</div>`;
+}
+
+/* ============================================================
+   View: Activity log
+   ============================================================ */
+
+function viewLog() {
+  const filter = state.ui.logFilter;
+  let entries = state.tasks
+    .filter(t => t.status === 'done' || t.status === 'cancelled')
+    .map(t => ({ task: t, at: t.status === 'done' ? t.completedAt : t.cancelledAt }));
+  if (filter !== 'all') entries = entries.filter(e => e.task.status === filter);
+  entries.sort((a, b) => b.at - a.at);
+
+  const totalExp = state.tasks.filter(t => t.status === 'done').reduce((sum, t) => sum + (t.expAwarded || 0), 0);
+  const doneCount = state.tasks.filter(t => t.status === 'done').length;
+  const cancelledCount = state.tasks.filter(t => t.status === 'cancelled').length;
+
+  const groups = [];
+  entries.forEach(entry => {
+    const key = dayKey(entry.at);
+    let group = groups.find(g => g.key === key);
+    if (!group) { group = { key, date: entry.at, items: [] }; groups.push(group); }
+    group.items.push(entry);
+  });
+
+  const tabs = [{ id: 'all', label: 'Semua' }, { id: 'done', label: 'Selesai' }, { id: 'cancelled', label: 'Dibatalkan' }];
+
+  return `
+    <div class="view-header"><div><div class="eyebrow">Tidak pernah hilang</div><h1>Aktivitas</h1></div></div>
+
+    <section class="stat-tile">
+      <div class="stat-tile-icon">${icon('check', 20)}</div>
+      <div><strong>${doneCount} selesai</strong><span>${totalExp} EXP terkumpul sepanjang waktu · ${cancelledCount} dibatalkan</span></div>
+    </section>
+
+    <div class="chip-row">
+      ${tabs.map(t => `<button class="chip ${filter === t.id ? 'active' : ''}" type="button" data-action="filter-log" data-filter="${t.id}">${t.label}</button>`).join('')}
+    </div>
+
+    ${groups.length ? groups.map(g => `
+      <section class="log-group">
+        <div class="log-date-heading">${formatLogDateHeading(g.date)}</div>
+        <div class="task-list roomy">${g.items.map(e => logEntry(e.task, e.at)).join('')}</div>
+      </section>`).join('') : emptyState('Belum ada riwayat aktivitas pada filter ini.')}`;
+}
+
+function logEntry(task, at) {
+  const tier = tierFromScore(task.difficulty + task.impact);
+  const primaryGainId = Object.entries(task.allocations).sort((a, b) => b[1] - a[1])[0][0];
+  const g = gainById(primaryGainId);
+  const done = task.status === 'done';
+  return `
+    <div class="task-item log-item ${done ? 'tone-cyan' : 'tone-muted'}" data-action="open-task" data-id="${task.id}">
+      <div class="task-tag" style="background:${g.color}1f;border-color:${g.color}33;color:${g.color}">${done ? icon('check', 15) : icon('ban', 15)}</div>
+      <div class="task-main">
+        <div>${escapeHtml(task.title)}</div>
+        <div class="task-meta">
+          <span>${g.label}</span>
+          <span>Tier ${tier.num}</span>
+          <span>${formatClockTime(at)}</span>
+        </div>
+      </div>
+      <div class="task-priority">${done ? `+${task.expAwarded} EXP` : 'Dibatalkan'}</div>
+    </div>`;
 }
 
 /* ============================================================
@@ -608,19 +755,23 @@ function viewTaskDetail(id) {
   const task = taskById(id);
   if (!task) return emptyState('Task tidak ditemukan.') + backLink('tasks');
 
+  const isActive = task.status === 'active';
   const tier = tierFromScore(task.difficulty + task.impact);
-  const monsterState = monsterStateFromDue(task.due, NOW);
+  const monsterState = isActive ? monsterStateFromDue(task.due, NOW) : (task.status === 'done' ? 'defeated' : 'released');
   const doneCount = task.subtasks.filter(s => s.done).length;
-  const hp = task.subtasks.length ? Math.round((1 - doneCount / task.subtasks.length) * 100) : 100;
-  const exp = Math.round(baseExperience(task.difficulty, task.impact) * timeMultiplier(task.due, NOW));
+  const liveHp = task.subtasks.length ? Math.round((1 - doneCount / task.subtasks.length) * 100) : 100;
+  const hp = task.status === 'done' ? 0 : liveHp;
+  const exp = isActive ? Math.round(baseExperience(task.difficulty, task.impact) * timeMultiplier(task.due, NOW)) : (task.expAwarded || 0);
   const running = state.ui.timer && state.ui.timer.taskId === task.id;
-  const allSubtasksDone = task.subtasks.length > 0 && doneCount === task.subtasks.length;
+  const allSubtasksDone = isActive && task.subtasks.length > 0 && doneCount === task.subtasks.length;
 
   return `
     <div class="view-header">
       <button class="icon-btn" type="button" data-action="go" data-route="tasks" aria-label="Kembali">${icon('back')}</button>
       <div><div class="eyebrow">Task detail</div><h1>${escapeHtml(task.title)}</h1></div>
     </div>
+
+    ${!isActive ? `<div class="status-banner ${task.status === 'done' ? 'tone-cyan' : 'tone-muted'}">${task.status === 'done' ? `${icon('check', 14)} Diselesaikan ${formatLogDateHeading(task.completedAt).toLowerCase()}, ${formatClockTime(task.completedAt)}` : `${icon('ban', 14)} Dibatalkan ${formatLogDateHeading(task.cancelledAt).toLowerCase()}, ${formatClockTime(task.cancelledAt)}`}</div>` : ''}
 
     <section class="hero-card">
       <div class="hero-header">
@@ -632,51 +783,55 @@ function viewTaskDetail(id) {
         <div class="hp-block">
           <div class="hp-row"><span>HP</span><strong>${hp}%</strong></div>
           <div class="hp-bar"><span style="width:${hp}%"></span></div>
-          ${stateBadge(monsterState)}
+          ${isActive ? stateBadge(monsterState) : `<span class="state-badge tone-${task.status === 'done' ? 'cyan' : 'blue'}">${task.status === 'done' ? 'Dikalahkan' : 'Dilepaskan'}</span>`}
         </div>
       </div>
 
       <div class="detail-metrics">
-        <div><span>Due</span><strong>${formatDue(task.due)}</strong></div>
+        <div><span>${isActive ? 'Due' : 'Dibuat'}</span><strong>${isActive ? formatDue(task.due) : formatLogDateHeading(task.createdAt)}</strong></div>
         <div><span>EXP</span><strong>${exp}</strong></div>
         <div><span>Estimasi</span><strong>${task.estMinutes}m</strong></div>
       </div>
 
+      ${isActive ? `
       <div class="timer-row">
         <span>${running ? formatElapsed(state.ui.timer.startedAt) : 'Sesi fokus belum mulai'}</span>
         <button class="filter-btn ${running ? 'danger' : ''}" type="button" data-action="${running ? 'stop-timer' : 'start-timer'}" data-id="${task.id}">
           ${icon('timer', 14)} ${running ? 'Selesai sesi' : 'Mulai'}
         </button>
-      </div>
+      </div>` : ''}
     </section>
 
     ${task.notes ? `<section class="module-card"><div class="eyebrow">Catatan</div><p class="notes-text">${escapeHtml(task.notes)}</p></section>` : ''}
 
+    ${task.subtasks.length || isActive ? `
     <section class="module-card">
       <div class="card-title-row"><div><div class="eyebrow">Checklist</div><h3>Subtask</h3></div></div>
       <div class="subtask-list">
         ${task.subtasks.map((s, i) => `
           <label class="subtask-item ${s.done ? 'done' : ''}">
-            <input type="checkbox" ${s.done ? 'checked' : ''} data-action="toggle-subtask" data-id="${task.id}" data-index="${i}" />
+            <input type="checkbox" ${s.done ? 'checked' : ''} ${isActive ? '' : 'disabled'} data-action="toggle-subtask" data-id="${task.id}" data-index="${i}" />
             <span>${escapeHtml(s.title)}</span>
           </label>`).join('') || emptyState('Belum ada subtask.')}
       </div>
+      ${isActive ? `
       <form class="subtask-form" data-action="add-subtask" data-id="${task.id}">
         <input type="text" name="subtaskTitle" placeholder="Tambah langkah…" />
         <button type="submit" class="filter-btn">Tambah</button>
       </form>
-      ${allSubtasksDone ? `<button class="primary-action ghost" type="button" data-action="complete-task" data-id="${task.id}">Semua langkah selesai — tandai task ini selesai?</button>` : ''}
-    </section>
+      ${allSubtasksDone ? `<button class="primary-action ghost" type="button" data-action="complete-task" data-id="${task.id}">Semua langkah selesai — tandai task ini selesai?</button>` : ''}` : ''}
+    </section>` : ''}
 
     <section class="module-card">
       <div class="card-title-row"><div><div class="eyebrow">Pembagian</div><h3>Gain allocation</h3></div></div>
       ${allocationBars(task.allocations)}
     </section>
 
+    ${isActive ? `
     <div class="detail-actions">
       <button class="primary-action" type="button" data-action="complete-task" data-id="${task.id}">${icon('check', 16)} Tandai selesai</button>
       <button class="ghost-action" type="button" data-action="cancel-task" data-id="${task.id}">Batalkan</button>
-    </div>`;
+    </div>` : ''}`;
 }
 
 function formatElapsed(startedAt) {
@@ -748,10 +903,14 @@ function viewBestiary() {
         const locked = entry.defeated === 0;
         return `
           <div class="beast-card ${locked ? 'locked' : ''}">
-            <div class="beast-avatar shape-${tier.shape} ${locked ? '' : 'dormant'}" style="--monster-scale:0.62;--monster-tilt:0deg;--horn-left-rotation:-14deg;--horn-right-rotation:14deg;--eye-size:18px;--eye-offset:28px;--snout-width:34px;--snout-height:14px;">
+            <div class="beast-avatar shape-${tier.shape} ${locked ? '' : 'dormant'}" style="--monster-scale:0.62;--monster-tilt:0deg;--grad-a:${tier.a};--grad-b:${tier.b};--glow-rgb:${tier.glow};--horn-left-rotation:-14deg;--horn-right-rotation:14deg;--eye-size:19px;--eye-offset:28px;--snout-width:32px;--snout-height:13px;">
+              <span class="monster-rim"></span>
               <span class="horn left"></span><span class="horn right"></span>
-              <span class="eye left"></span><span class="eye right"></span>
+              ${tier.tail ? '<span class="tail"></span>' : ''}
+              <span class="brow left"></span><span class="brow right"></span>
+              <span class="eye left"><span class="pupil"></span></span><span class="eye right"><span class="pupil"></span></span>
               <span class="snout"></span>
+              ${tier.fangs ? '<span class="fang left"></span><span class="fang right"></span>' : ''}
             </div>
             ${locked ? `<span class="beast-lock">${icon('lock', 14)}</span>` : ''}
             <strong>${tier.name}</strong>
@@ -873,10 +1032,142 @@ function viewSettings() {
 }
 
 /* ============================================================
+   View: AI Agent
+   ============================================================ */
+
+function agentAnalytics() {
+  const active = state.tasks.filter(t => t.status === 'active');
+  const done = state.tasks.filter(t => t.status === 'done');
+  const cancelled = state.tasks.filter(t => t.status === 'cancelled');
+  const overdue = active.filter(t => ['rampage', 'feral'].includes(monsterStateFromDue(t.due, NOW)));
+  const sortedByPriority = [...active].sort((a, b) => priorityScoreOf(b) - priorityScoreOf(a));
+  const levels = gainLevelsMap();
+  const neglectedGainId = GAINS.reduce((a, b) => levels[a.id] <= levels[b.id] ? a : b).id;
+  const totalExpEarned = done.reduce((sum, t) => sum + (t.expAwarded || 0), 0);
+  return { active, done, cancelled, overdue, sortedByPriority, levels, neglectedGainId, totalExpEarned };
+}
+
+function renderAgentSummary() {
+  const a = agentAnalytics();
+  const parts = [];
+  parts.push(`Halo! Aku sudah lihat datamu: <b>${a.active.length} task aktif</b>, <b>${a.done.length} selesai</b>, dan <b>${a.cancelled.length} dibatalkan</b>.`);
+
+  if (a.overdue.length) {
+    const worst = [...a.overdue].sort((x, y) => priorityScoreOf(y) - priorityScoreOf(x))[0];
+    parts.push(`⚠️ <b>${a.overdue.length} monster sedang mengamuk atau liar</b> — yang paling genting: <b>${escapeHtml(worst.title)}</b>. Selesaikan itu dulu sebelum yang lain menyusul.`);
+  } else {
+    parts.push('Tidak ada monster yang mengamuk sekarang — kerja bagus menjaga semuanya tetap terkendali.');
+  }
+
+  const g = gainById(a.neglectedGainId);
+  parts.push(`Dari sisi keseimbangan, <b style="color:${g.color}">${g.label}</b> levelnya paling tertinggal dibanding lima Gain lain — task ke sana dapat bonus <b>+15% EXP</b>.`);
+
+  if (a.done.length) {
+    parts.push(`Sejauh ini kamu sudah mengalahkan ${a.done.length} monster dan mengumpulkan <b>${a.totalExpEarned} EXP</b> total.`);
+  }
+
+  parts.push('Tanya aku soal prioritas, Gain yang tertinggal, atau riwayat task-mu lewat tombol di bawah.');
+  return parts.join('<br><br>');
+}
+
+function answerAgentQuestion(intent) {
+  const a = agentAnalytics();
+  switch (intent) {
+    case 'priority': {
+      if (!a.sortedByPriority.length) return 'Tidak ada task aktif saat ini — semua sudah beres!';
+      const rows = a.sortedByPriority.slice(0, 3).map((t, i) => {
+        const tier = tierFromScore(t.difficulty + t.impact);
+        const st = monsterStateFromDue(t.due, NOW);
+        return `${i + 1}. <b>${escapeHtml(t.title)}</b> — Tier ${tier.num} ${tier.name}, ${STATE_LABEL[st]} (${formatDue(t.due)})`;
+      }).join('<br>');
+      return `Berdasarkan skor prioritas (state monster × tier, sesuai bagian 12 PRD), ini yang paling mendesak:<br>${rows}`;
+    }
+    case 'neglected': {
+      const g = gainById(a.neglectedGainId);
+      return `<b style="color:${g.color}">${g.label}</b> (${g.sub}) levelnya paling rendah dibanding lima Gain lainnya. Task yang dialokasikan ke sana dapat bonus <b>+15% EXP</b> sampai levelnya menyusul — coba cari satu task kecil untuk ${g.label} minggu ini.`;
+    }
+    case 'done': {
+      if (!a.done.length) return 'Belum ada task yang diselesaikan.';
+      const recent = [...a.done].sort((x, y) => y.completedAt - x.completedAt).slice(0, 5);
+      const rows = recent.map(t => `• ${escapeHtml(t.title)} — +${t.expAwarded} EXP (${formatLogDateHeading(t.completedAt)})`).join('<br>');
+      return `Kamu sudah menyelesaikan ${a.done.length} task, total ${a.totalExpEarned} EXP. Lima yang terbaru:<br>${rows}`;
+    }
+    case 'cancelled': {
+      if (!a.cancelled.length) return 'Belum ada task yang dibatalkan — perencanaanmu cukup realistis sejauh ini.';
+      const rows = a.cancelled.map(t => `• ${escapeHtml(t.title)} (${formatLogDateHeading(t.cancelledAt)})`).join('<br>');
+      return `${a.cancelled.length} task pernah dibatalkan:<br>${rows}`;
+    }
+    case 'streak':
+      return `Streak-mu sekarang <b>${state.stats.currentStreak} hari</b> beruntun (rekor ${state.stats.longestStreak} hari). Setiap hari tambahan menaikkan pengali EXP hingga maksimum +20%.`;
+    default:
+      return 'Aku bisa bantu soal <b>prioritas</b>, Gain yang <b>tertinggal</b>, ringkasan task yang <b>selesai</b> atau <b>dibatalkan</b>, dan <b>streak</b>-mu. Coba tanya salah satunya.';
+  }
+}
+
+function detectAgentIntent(text) {
+  const t = text.toLowerCase();
+  if (/prioritas|dulu|urgent|mendesak|penting/.test(t)) return 'priority';
+  if (/gain|tertinggal|seimbang|balance/.test(t)) return 'neglected';
+  if (/selesai|kelar|beres|done|kalahkan/.test(t)) return 'done';
+  if (/batal|cancel/.test(t)) return 'cancelled';
+  if (/streak|runtun|konsisten/.test(t)) return 'streak';
+  return 'unknown';
+}
+
+function runAgentQuestion(intent, displayText) {
+  const agent = state.ui.agent;
+  agent.messages.push({ role: 'user', html: escapeHtml(displayText) });
+  agent.thinking = true;
+  render({ scrollBottom: true });
+  setTimeout(() => {
+    agent.messages.push({ role: 'agent', html: answerAgentQuestion(intent) });
+    agent.thinking = false;
+    render({ scrollBottom: true });
+  }, 600);
+}
+
+function agentBubble(m) {
+  return `<div class="agent-bubble ${m.role}">${m.role === 'agent' ? `<span class="agent-avatar">${icon('sparkle', 13)}</span>` : ''}<div class="agent-text">${m.html}</div></div>`;
+}
+
+function viewAgent() {
+  const agent = state.ui.agent;
+  if (!agent.messages.length) {
+    agent.messages.push({ role: 'agent', html: renderAgentSummary() });
+  }
+  const quickQuestions = [
+    { q: 'priority', label: 'Prioritas sekarang?' },
+    { q: 'neglected', label: 'Gain yang tertinggal?' },
+    { q: 'done', label: 'Ringkas yang selesai' },
+    { q: 'cancelled', label: 'Yang dibatalkan' }
+  ];
+
+  return `
+    <div class="view-header">
+      <button class="icon-btn" type="button" data-action="go" data-route="home" aria-label="Kembali">${icon('back')}</button>
+      <div><div class="eyebrow">Asisten dalam app</div><h1>AI Agent</h1></div>
+    </div>
+
+    <div class="agent-thread">
+      ${agent.messages.map(m => agentBubble(m)).join('')}
+      ${agent.thinking ? `<div class="agent-bubble agent"><span class="agent-avatar">${icon('sparkle', 13)}</span><span class="agent-dots"><span></span><span></span><span></span></span></div>` : ''}
+    </div>
+
+    <div class="chip-row">
+      ${quickQuestions.map(qq => `<button class="chip" type="button" data-action="ask-agent" data-q="${qq.q}" data-label="${qq.label}">${qq.label}</button>`).join('')}
+    </div>
+
+    <form class="agent-input-row" data-action="agent-ask">
+      <input type="text" name="question" placeholder="Tanya soal task-mu…" autocomplete="off" />
+      <button type="submit" class="icon-btn accent" aria-label="Kirim">${icon('send', 16)}</button>
+    </form>`;
+}
+
+/* ============================================================
    Router
    ============================================================ */
 
-const NAV_MAP = { home: 'home', tasks: 'tasks', create: 'create', task: 'tasks', bestiary: 'bestiary', gain: 'home', stats: 'stats', settings: null, login: null };
+const NAV_MAP = { home: 'home', tasks: 'tasks', log: 'log', create: 'create', task: 'tasks', bestiary: 'bestiary', gain: 'home', stats: 'stats', settings: null, agent: null, login: null };
 
 function parseHash() {
   const raw = location.hash.replace(/^#\/?/, '');
@@ -884,7 +1175,7 @@ function parseHash() {
   return { name: name || 'home', param };
 }
 
-function render() {
+function render(opts = {}) {
   if (timerHandle) { clearInterval(timerHandle); timerHandle = null; }
 
   let { name, param } = parseHash();
@@ -895,20 +1186,22 @@ function render() {
     case 'login': html = viewLogin(); break;
     case 'home': html = viewHome(); break;
     case 'tasks': html = viewTasks(); break;
+    case 'log': html = viewLog(); break;
     case 'create': html = viewCreate(); break;
     case 'task': html = viewTaskDetail(param); break;
     case 'gain': html = viewGainDetail(param); break;
     case 'bestiary': html = viewBestiary(); break;
     case 'stats': html = viewStats(); break;
     case 'settings': html = viewSettings(); break;
+    case 'agent': html = viewAgent(); break;
     default: html = viewHome();
   }
 
   viewRoot.innerHTML = html;
-  viewRoot.scrollTop = 0;
   viewRoot.classList.remove('fade-in');
   void viewRoot.offsetWidth;
   viewRoot.classList.add('fade-in');
+  viewRoot.scrollTop = opts.scrollBottom ? viewRoot.scrollHeight : 0;
 
   document.body.classList.toggle('is-login', name === 'login');
   bottomNav.hidden = name === 'login';
@@ -958,6 +1251,13 @@ document.addEventListener('click', event => {
     case 'filter-tasks':
       state.ui.taskFilter = el.dataset.filter;
       render();
+      break;
+    case 'filter-log':
+      state.ui.logFilter = el.dataset.filter;
+      render();
+      break;
+    case 'ask-agent':
+      runAgentQuestion(el.dataset.q, el.dataset.label);
       break;
     case 'set-type':
       f.type = el.dataset.type;
@@ -1072,6 +1372,13 @@ document.addEventListener('submit', event => {
     taskById(el.dataset.id).subtasks.push({ title, done: false });
     render();
   }
+
+  if (action === 'agent-ask') {
+    const data = new FormData(el);
+    const question = (data.get('question') || '').toString().trim();
+    if (!question) return;
+    runAgentQuestion(detectAgentIntent(question), question);
+  }
 });
 
 document.addEventListener('input', event => {
@@ -1160,6 +1467,8 @@ function completeTask(id) {
   beast.defeated += 1;
 
   task.status = 'done';
+  task.completedAt = new Date();
+  task.expAwarded = awarded;
   state.ui.timer = null;
   toast(`Monster dikalahkan! +${awarded} EXP`);
   go('tasks');
@@ -1169,6 +1478,7 @@ function cancelTask(id) {
   const task = taskById(id);
   if (!task) return;
   task.status = 'cancelled';
+  task.cancelledAt = new Date();
   state.ui.timer = null;
   toast('Task dibatalkan, monster dilepaskan.');
   go('tasks');
