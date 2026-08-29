@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Impact Task</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <div class="screen">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="signal-group">
+            <span class="signal">◔</span>
+            <span class="signal">▣</span>
+            <span class="signal">▤</span>
+          </div>
+        </div>
+
+        <header class="topbar">
+          <div>
+            <div class="eyebrow">Friday · 29 Aug</div>
+            <h1>Impact</h1>
+          </div>
+          <button class="add-button">＋</button>
+        </header>
+
+        <section class="quick-pills">
+          <div class="pill danger"><span class="pulse"></span>4 monsters</div>
+          <div class="pill"><span class="pulse success"></span>6 Gains</div>
+        </section>
+
+        <section class="hero-card">
+          <div class="hero-header">
+            <div>
+              <div class="eyebrow">Threat</div>
+              <h2 id="monster-name">Goblin</h2>
+            </div>
+            <span class="tier-badge" id="tier-pill">Tier 4</span>
+          </div>
+
+          <div class="hero-body">
+            <div class="monster-wrap">
+              <div class="monster" id="monster-avatar">
+                <span class="horn left"></span>
+                <span class="horn right"></span>
+                <span class="eye left"></span>
+                <span class="eye right"></span>
+                <span class="snout"></span>
+              </div>
+            </div>
+
+            <div class="mini-stats">
+              <div>
+                <span>State</span>
+                <strong id="monster-state">Awake</strong>
+              </div>
+              <div>
+                <span>Score</span>
+                <strong id="monster-score">80</strong>
+              </div>
+              <div>
+                <span>EXP</span>
+                <strong id="monster-exp">88</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="slider-block">
+            <div class="slider-row">
+              <label>Difficulty</label>
+              <strong id="difficulty-value">58</strong>
+            </div>
+            <input id="difficulty" type="range" min="0" max="100" value="58" />
+          </div>
+
+          <div class="slider-block">
+            <div class="slider-row">
+              <label>Impact</label>
+              <strong id="impact-value">42</strong>
+            </div>
+            <input id="impact" type="range" min="0" max="100" value="42" />
+          </div>
+        </section>
+
+        <section class="balance-card">
+          <div class="card-title-row">
+            <div>
+              <div class="eyebrow">Gains</div>
+              <h3>Balance</h3>
+            </div>
+            <span class="live-pill">live</span>
+          </div>
+
+          <div class="radar-panel">
+            <div class="radar-chart">
+              <span class="ring ring-1"></span>
+              <span class="ring ring-2"></span>
+              <span class="ring ring-3"></span>
+              <span class="ring ring-4"></span>
+              <span class="radar-shape" id="radar-shape"></span>
+            </div>
+
+            <div class="gains-grid">
+              <span>Raga</span>
+              <span>Nalar</span>
+              <span>Karya</span>
+              <span>Harta</span>
+              <span>Ikatan</span>
+              <span>Jiwa</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="module-card" id="gains-module">
+          <div class="card-title-row">
+            <div>
+              <div class="eyebrow">Module</div>
+              <h3>Gains</h3>
+            </div>
+            <button class="filter-btn">View</button>
+          </div>
+
+          <div class="gain-overview" id="gain-overview"></div>
+        </section>
+
+        <section class="tasks">
+          <div class="card-title-row">
+            <div>
+              <div class="eyebrow">Priority</div>
+              <h3>Task queue</h3>
+            </div>
+            <button class="filter-btn">All</button>
+          </div>
+
+          <div class="task-list" id="task-list"></div>
+        </section>
+
+        <section class="module-card" id="task-detail-module">
+          <div class="card-title-row">
+            <div>
+              <div class="eyebrow">Module</div>
+              <h3>Task detail</h3>
+            </div>
+            <button class="filter-btn" id="toggle-detail">Open</button>
+          </div>
+
+          <div class="detail-shell">
+            <div class="detail-header">
+              <span class="detail-badge" id="detail-gain">Harta</span>
+              <span class="detail-state" id="detail-state">Alert</span>
+            </div>
+
+            <h4 id="detail-title">Bayar tagihan listrik</h4>
+
+            <div class="detail-metrics">
+              <div>
+                <span>Due</span>
+                <strong id="detail-due">Tonight</strong>
+              </div>
+              <div>
+                <span>Threat</span>
+                <strong id="detail-threat">Tier 4</strong>
+              </div>
+              <div>
+                <span>EXP</span>
+                <strong id="detail-exp">88</strong>
+              </div>
+            </div>
+
+            <div class="gain-allocation" id="gain-allocation"></div>
+          </div>
+        </section>
+
+        <section class="module-card" id="quick-add-module">
+          <div class="card-title-row">
+            <div>
+              <div class="eyebrow">Module</div>
+              <h3>Create task</h3>
+            </div>
+            <button class="filter-btn" type="button" id="quick-add-toggle">Add</button>
+          </div>
+
+          <form class="quick-add-form" id="quick-add-form">
+            <label>
+              <span>Task title</span>
+              <input id="new-task-title" type="text" value="Membaca buku 20 menit" />
+            </label>
+            <label>
+              <span>Primary Gain</span>
+              <select id="new-task-gain">
+                <option>Raga</option>
+                <option>Nalar</option>
+                <option>Karya</option>
+                <option>Harta</option>
+                <option>Ikatan</option>
+                <option>Jiwa</option>
+              </select>
+            </label>
+            <label>
+              <span>Due</span>
+              <select id="new-task-due">
+                <option>Tonight</option>
+                <option>Tomorrow</option>
+                <option>This week</option>
+                <option>Later</option>
+              </select>
+            </label>
+            <button type="submit" class="primary-action">Create task</button>
+          </form>
+        </section>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
