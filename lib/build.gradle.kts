@@ -13,10 +13,7 @@ plugins {
     `java-library`
 }
 
-repositories {
-    // Use Maven Central for resolving dependencies.
-    mavenCentral()
-}
+// Repositories are declared centrally in settings.gradle.kts (dependencyResolutionManagement).
 
 dependencies {
     // Use JUnit Jupiter for testing.

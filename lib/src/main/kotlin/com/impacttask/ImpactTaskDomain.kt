@@ -34,12 +34,12 @@ enum class ThreatTier(val minScore: Int, val maxScore: Int, val label: String) {
     }
 }
 
-enum class MonsterState {
-    DORMANT,
-    STIRRING,
-    AWAKE,
-    RAMPAGE,
-    FERAL;
+enum class MonsterState(val priorityWeight: Int) {
+    DORMANT(1),
+    STIRRING(2),
+    AWAKE(3),
+    RAMPAGE(4),
+    FERAL(5);
 
     companion object {
         fun fromDeadline(deadline: LocalDateTime?, now: LocalDateTime): MonsterState {
@@ -57,9 +57,32 @@ enum class MonsterState {
     }
 }
 
+data class LevelProgress(val level: Int, val floorExp: Int, val ceilExp: Int, val progress: Double)
+
 object TaskCalculator {
     fun baseExperience(difficulty: Int, impact: Int): Double {
         return (impact * 1.0) + (difficulty * 0.7)
+    }
+
+    /**
+     * Completed >=24h early -> 1.15, on time -> 1.00, no deadline -> 1.00,
+     * late -> decays 0.05/day, floored at 0.40 (never zero: effort still counts).
+     */
+    fun timeMultiplier(deadline: LocalDateTime?, now: LocalDateTime): Double {
+        if (deadline == null) return 1.0
+        val remainingHours = Duration.between(now, deadline).toHours()
+        return when {
+            remainingHours >= 24 -> 1.15
+            remainingHours >= 0 -> 1.0
+            else -> {
+                val lateDays = Math.ceil(-remainingHours / 24.0)
+                maxOf(0.40, 1 - 0.05 * lateDays)
+            }
+        }
+    }
+
+    fun streakMultiplier(streakDays: Int): Double {
+        return 1 + minOf(0.20, 0.02 * streakDays)
     }
 
     fun balanceMultiplier(targetGain: Gain, gainLevels: Map<Gain, Int>): Double {
@@ -76,5 +99,32 @@ object TaskCalculator {
         return normalized.mapValues { (_, percent) ->
             ((total * percent.toDouble()) / totalAllocation.toDouble()).roundToInt()
         }
+    }
+
+    /** Cumulative EXP required to reach level n. lv2 -> 303, lv10 -> 3981 (see PRD 07). */
+    fun expForLevel(level: Int): Int {
+        if (level <= 0) return 0
+        return (100 * Math.pow(level.toDouble(), 1.6)).roundToInt()
+    }
+
+    fun levelProgress(totalExp: Int): LevelProgress {
+        var level = 0
+        while (level < 200 && expForLevel(level + 1) <= totalExp) level++
+        val floorExp = expForLevel(level)
+        val ceilExp = expForLevel(level + 1)
+        val progress = if (ceilExp > floorExp) {
+            (totalExp - floorExp).toDouble() / (ceilExp - floorExp)
+        } else {
+            0.0
+        }
+        return LevelProgress(level, floorExp, ceilExp, progress.coerceIn(0.0, 1.0))
+    }
+
+    /**
+     * Auto-priority ordering (PRD 12): monster state dominates tier, since a
+     * rampaging light task outranks a heavy but still-dormant one.
+     */
+    fun priorityScore(tier: ThreatTier, state: MonsterState): Int {
+        return state.priorityWeight * 1000 + (tier.ordinal + 1) * 10
     }
 }

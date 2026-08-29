@@ -6,3 +6,10 @@ build
 
 # Ignore Kotlin plugin data
 .kotlin
+
+# Android / Android Studio (machine-specific, never shared)
+local.properties
+.idea
+*.iml
+captures
+.cxx

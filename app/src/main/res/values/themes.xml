@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Compose owns all real theming (see ui/theme/Theme.kt); this XML theme
+         only satisfies the manifest's android:theme requirement and sets the
+         window background so there's no white flash before Compose draws. -->
+    <style name="Theme.ImpactTask" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">#05070D</item>
+        <item name="android:statusBarColor">#05070D</item>
+        <item name="android:navigationBarColor">#05070D</item>
+    </style>
+</resources>
