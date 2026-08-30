@@ -1,8 +1,8 @@
 Konsep Produk
 Android · Kotlin
-Draft v0.1
+Draft v0.2
 Impact Task
-Task manager di mana setiap pekerjaan terhubung ke enam aspek hidupmu, punya bobot dampak yang kamu tentukan sendiri, dan melahirkan monster yang makin ganas kalau ditunda.
+Task manager di mana setiap pekerjaan terhubung ke enam aspek hidupmu, punya bobot dampak yang kamu tentukan sendiri, dan menumbuhkan tanaman yang layu kalau ditunda.
 
 01 — Premis
 Kenapa ini bukan to-do list biasa
@@ -13,7 +13,7 @@ Progres yang terakumulasi
 Task selesai tidak hilang — dia jadi EXP di salah satu dari enam Gains. Setelah sebulan kamu bisa lihat aspek hidup mana yang benar-benar kamu urus.
 
 Penundaan yang terasa
-Task yang dibiarkan tidak cuma jadi badge merah. Dia jadi makhluk yang bangun, keluar dari daftar, dan nongkrong di layar utamamu.
+Task yang dibiarkan tidak cuma jadi badge merah. Dia jadi tanaman yang lupa disiram — layunya kelihatan, keluar dari kartunya, dan menunggu di kebun utama layar utamamu.
 
 02 — Koreksi desain
 Dua hal di ide awal yang perlu dibetulkan dulu
@@ -26,16 +26,16 @@ Bayar tagihan listrik — kesulitan 5, dampak 30. Total 35, tier terendah. Padah
 Belajar bahasa Jepang — kesulitan 85, dampak 90. Total 175, tier tertinggi. Padahal tidak ada deadline sama sekali.
 Skor 200 mengukur seberapa berat sebuah task, bukan seberapa mendesak. Keduanya beda sumbu.
 
-Solusi — pisahkan jadi dua sumbu, monsternya tetap satu
-Ide monsternya tidak berubah sama sekali. Yang berubah cuma ini: 200 poin menentukan ukuran & jenis monster, deadline menentukan tingkah lakunya.
+Solusi — pisahkan jadi dua sumbu, tanamannya tetap satu
+Mekaniknya tidak berubah sama sekali dari draf sebelumnya — cuma wujudnya yang diganti, dari monster yang mengejar jadi tanaman yang kamu rawat sendiri, supaya penundaan terasa seperti rasa sayang dan tanggung jawab, bukan rasa takut dikejar. Yang menentukan sistemnya tetap: 200 poin menentukan ukuran & jenis tanaman, deadline menentukan seberapa segar dia.
 
-Sumbu A — Threat Tier 1–10
-Dari Kesulitan + Dampak (0–200). Menentukan monster apa yang lahir dari task ini, berapa EXP yang dia bawa, dan seberapa besar dia digambar.
+Sumbu A — Skala Tumbuh 1–10
+Dari Kesulitan + Dampak (0–200). Menentukan tanaman apa yang tumbuh dari task ini, berapa EXP yang dia bawa, dan seberapa besar dia digambar.
 
-Sumbu B — Urgency State
-Dari sisa waktu ke deadline. Menentukan monsternya sedang apa — tidur, menggeliat, bangun, atau mengamuk. Tier tinggi bangun lebih awal dan berisik lebih sering.
+Sumbu B — Kondisi Kesegaran
+Dari sisa waktu ke deadline. Menentukan tanamannya sedang apa — berakar tenang, mulai haus, perlu disiram, atau layu. Tier tinggi mulai haus lebih awal dan minta perhatian lebih sering.
 
-Efeknya: tagihan listrik jadi Imp yang mengamuk (kecil tapi teriak-teriak), belajar Jepang jadi Titan yang tidur (raksasa tapi belum ganggu). Persis seperti hidup nyata.
+Efeknya: tagihan listrik jadi Perdu yang layu (kecil tapi minta tolong sekarang), belajar Jepang jadi Pohon Purba yang masih berakar tenang (besar tapi belum mendesak). Persis seperti hidup nyata.
 
 Masalah 2 — Kesulitan yang menambah EXP mengundang kecurangan
 Kalau EXP naik seiring skor kesulitan, dan skornya diisi sendiri oleh user, otak akan cari jalan pintas: “cuci piring itu kesulitan 90, kan capek.” Sistemnya rusak dalam dua minggu.
@@ -72,8 +72,11 @@ Jiwa
 Spiritual & makna
 Ibadah, refleksi, berbagi, hobi yang mengisi, istirahat yang disengaja.
 
+Gains tambahan — opsional, manual
+Keenam Gains di atas tetap fondasi yang tidak berubah — radar chart di beranda selalu menampilkan keenamnya duluan, dan tidak ada rencana menggantinya jadi metafora lain (mis. “6 petak kebun”). Tapi kalau hidupmu punya satu aspek spesifik yang tidak pas dipetakan ke salah satu dari enam itu — “Bisnis Sampingan” yang terasa beda dari Karya, atau “Parenting” yang terasa lebih spesifik dari Ikatan — kamu bisa menambah Gain sendiri lewat tombol “Tambah Gain” di layar Detail Gains: nama bebas, pilih warna & ikon seperti Gain bawaan. Gain buatan sendiri ini ikut rumus EXP dan pengali keseimbangan yang sama persis di bagian 07 — bukan mekanik baru, cuma entri baru di tabel. Dibatasi maksimal 4 Gain tambahan supaya radar chart tidak jadi terlalu ramai untuk dibaca sekali pandang.
+
 Satu task boleh mengisi beberapa Gains
-“Lari pagi bareng adik” itu Raga dan Ikatan. User mengalokasikan persentase ke maksimal 3 Gains lewat slider — default 100% ke satu Gain supaya input tetap cepat, alokasi ke banyak Gains disembunyikan di balik tombol “Bagi ke Gains lain”.
+“Lari pagi bareng adik” itu Raga dan Ikatan. User mengalokasikan persentase ke maksimal 3 Gains (bawaan maupun buatan sendiri) lewat slider — default 100% ke satu Gain supaya input tetap cepat, alokasi ke banyak Gains disembunyikan di balik tombol “Bagi ke Gains lain”.
 
 04 — Input
 Dua slider, satu skor
@@ -86,102 +89,102 @@ Seberapa besar pengaruhnya ke hidup
 Anchor: 20 hilang tak terasa · 50 terasa minggu ini · 80 terasa tahun ini · 100 mengubah arah hidup.
 
 Preview langsung saat menggeser
-Ini momen paling menyenangkan di seluruh app dan pantas dikerjakan paling serius: saat kedua slider digeser, monsternya berubah wujud secara real-time di atas slider. Geser dampak dari 40 ke 70, si Goblin tumbuh jadi Brute di depan mata. Orang akan main-mainkan slider ini cuma buat lihat animasinya — dan itu bagus, karena artinya mereka benar-benar memikirkan bobot task-nya.
+Ini momen paling menyenangkan di seluruh app dan pantas dikerjakan paling serius: saat kedua slider digeser, tanamannya tumbuh secara real-time di atas slider. Geser dampak dari 40 ke 70, tunas kecil membesar jadi Semak berdaun rimbun di depan mata. Orang akan main-mainkan slider ini cuma buat lihat animasinya — dan itu bagus, karena artinya mereka benar-benar memikirkan bobot task-nya.
 
-// Threat Tier dihitung real-time, tanpa pembulatan yang bikin bingung
+// Skala Tumbuh dihitung real-time, tanpa pembulatan yang bikin bingung
 skor  = kesulitan + dampak          // 0 .. 200
 tier  = clamp(1, 10, floor(skor / 20) + 1)
 05 — Jawaban untuk pertanyaan namamu
-Sepuluh Threat Tier
-Ini rekomendasi utamaku: nama-nama pendek yang selaras dengan nama app, mudah dijadikan karakter, dan jelas berjenjang tanpa perlu dijelaskan.
+Sepuluh Skala Tumbuh
+Ini rekomendasi utamaku, sudah divalidasi lewat prototipe interaktif dan kamu setujui: nama-nama pendek yang selaras dengan gagasan kebun, mudah dibayangkan wujudnya, dan jelas berjenjang tanpa perlu dijelaskan — daun kecil jelas lebih muda dari kanopi rimbun, tidak butuh keterangan tambahan.
 
-Tier	Poin	Nama	Wujud karakter	Perilaku saat menunggak
+Tier	Poin	Nama	Wujud tanaman	Perilaku saat menunggak
 1	0–19	
-Speck
-Sebutir debu bermata satu, mengambang malas	Diam saja. Tidak pernah kirim notifikasi.
+Tunas
+Sebutir biji yang baru pecah, dua helai daun mungil menyembul dari tanah	Diam saja. Tidak pernah kirim notifikasi.
 2	20–39	
-Blob
-Gumpalan lendir bulat yang memantul pelan	Satu notifikasi di hari-H, itu pun bisa dimatikan.
+Kecambah
+Batang tipis setinggi jari, tiga-empat daun kecil	Satu notifikasi lembut di hari-H, itu pun bisa dimatikan.
 3	40–59	
-Imp
-Setan cebol bertanduk kecil, cengengesan	Mulai muncul di sudut layar utama saat lewat deadline.
+Perdu
+Semak kecil rimbun setinggi lutut	Mulai tampak layu di sudut kartu saat lewat deadline.
 4	60–79	
-Goblin
-Bertaring, bawa tongkat, jalan mondar-mandir	Notifikasi H-1 dan hari-H. Berjalan menyeberangi layar.
+Semak
+Rimbun setinggi pinggang, mulai berbunga	Notifikasi H-1 dan hari-H. Daunnya kelihatan menunduk di daftar task.
 5	80–99	
-Brute
-Bertubuh besar, tangan berat, napas terlihat	Mengetuk “kaca” layar sekali saat terlewat.
+Pohon Muda
+Batang mulai mengeras, kanopi kecil terbentuk	Tetes air mengetuk “kaca” layar sekali saat terlewat.
 6	100–119	
-Stalker
-Kurus, tinggi, wajah tersembunyi, gerak patah-patah	Muncul di ujung layar tiap kali app dibuka. Tidak pergi.
+Pohon Rimbun
+Kanopi penuh dan teduh, akar mulai kokoh	Muncul di kebun utama beranda tiap kali app dibuka. Tidak pergi sampai disiram.
 7	120–139	
-Warden
-Berzirah, memanggul rantai, berdiri diam mengawasi	Kalau Terjadwal: alarm layar penuh tepat di jam mulai. Kalau bukan: heads-up prioritas tinggi. Mengunci widget sampai ditanggapi.
+Pohon Tua
+Batang tebal berlumut, akar mulai terlihat di permukaan	Kalau Terjadwal: alarm layar penuh (vignette gelap tegas) tepat di jam mulai. Kalau bukan: heads-up prioritas tinggi. Mengunci widget sampai ditanggapi.
 8	140–159	
-Behemoth
-Terlalu besar untuk muat di layar — hanya kaki & mata yang kelihatan	Layar utama bergetar halus. Mulai mengurangi EXP Gains terkait.
+Beringin
+Terlalu besar untuk muat di layar — hanya akar gantung & dedaunan bawah yang kelihatan	Layar utama bergetar halus, seperti tertiup angin kencang. Mulai mengurangi EXP Gains terkait.
 9	160–179	
-Wraith
-Bayangan tembus pandang yang meredupkan warna di sekitarnya	Menurunkan saturasi seluruh tema app selama masih menunggak.
+Hutan Kecil
+Kanopi rimbun jadi latar, satu pohon satelit mulai tumbuh di sampingnya	Menurunkan saturasi seluruh tema app selama masih menunggak — kekeringan yang menjalar.
 10	180–200	
-Titan
-Siluet raksasa jadi latar belakang layar utama, bukan lagi ikon	Mengambil alih layar utama. Task lain diredupkan sampai dia dihadapi.
+Pohon Purba
+Siluet raksasa jadi latar belakang layar utama, bukan lagi ikon, dikelilingi pohon-pohon satelit	Mengambil alih layar utama. Task lain diredupkan sampai dia dihadapi (disiram).
 Alternatif A — Nusantara
-Kalau mau identitas lokal
-Debu → Kunang → Cicak → Tikus → Kelelawar → Serigala → Buaya → Harimau → Naga → Kala
+Kalau mau identitas lokal lebih kental dari nama pohon umum
+Semai → Pandan → Bambu Muda → Puspa → Meranti Muda → Meranti Rimbun → Jati Tua → Beringin Kampung → Rimba Kecil → Rimba Purba
 
-Hangat dan langsung akrab buat pengguna Indonesia. Risikonya: fauna nyata lebih sulit dibikin lucu-menakutkan dibanding monster fiksi, dan jenjangnya kurang terbaca di pasar global.
+Hangat dan langsung akrab buat pengguna Indonesia yang besar mengenal nama-nama ini. Risikonya: sebagian nama spesifik daerah (meranti, puspa) kurang dikenal pengguna kota besar, dan lebih sulit diterjemahkan ke Inggris tanpa kehilangan rasa lokalnya.
 
-Alternatif B — Kosmik
-Kalau mau nyambung ke nama app
-Dust → Pebble → Shard → Stone → Boulder → Bolide → Meteor → Comet → Asteroid → Cataclysm
+Alternatif B — Musim
+Kalau mau fokus ke tahap pertumbuhan, bukan spesies tertentu
+Semai → Tunas → Berkuncup → Berbunga → Berbuah Muda → Berbuah Lebat → Rimbun → Menua → Melegenda → Abadi
 
-Permainan kata yang rapi — impact juga berarti tumbukan meteor. Tapi batu tidak punya mata, dan seluruh pilar emosional app ini bergantung pada karakter yang bisa menatapmu.
+Tidak terikat identitas flora tertentu, jadi lebih netral secara budaya. Tapi jenjangnya terasa lebih abstrak dan sedikit lebih sulit dibayangkan wujud visualnya dibanding nama pohon yang konkret.
 
 Rekomendasi
-Pakai set utama (Speck → Titan). Alasannya satu dan menentukan: kesepuluhnya bisa digambar sebagai makhluk hidup dengan mata dan ekspresi, dan itulah satu-satunya alasan mekanik monster ini bekerja. Simpan nama Nusantara sebagai skin pack di kemudian hari — ganti nama & sprite, tier dan angkanya sama persis.
+Pakai set utama (Tunas → Pohon Purba) — ini yang sudah kamu setujui lewat prototipe. Simpan nama Nusantara dan set Musim sebagai skin pack di kemudian hari: ganti nama & warna, tier dan angkanya sama persis.
 
 06 — Mekanik inti
-Siklus hidup monster
-Setiap task melahirkan tepat satu monster saat dibuat. Tier-nya menetap; state-nya berubah mengikuti waktu.
+Siklus hidup tanaman
+Setiap task menanam tepat satu tanaman saat dibuat. Tier-nya menetap; kondisinya berubah mengikuti waktu.
 
 STATE 1
-Dormant — Tidur
-Lebih dari 3 hari sebelum jatuh tempo, atau task tanpa jadwal. Meringkuk tidur di kartu task. Nol notifikasi.
+Berakar — Tenang
+Lebih dari 3 hari sebelum jatuh tempo, atau task tanpa jadwal. Tertanam diam di kartu task, akarnya kokoh. Nol notifikasi.
 
 STATE 2
-Stirring — Menggeliat
-H-3 sampai H-1. Membuka satu mata, sesekali menguap. Tier 7+ dapat satu notifikasi tenang.
+Mulai Haus — Menunduk pelan
+H-3 sampai H-1. Daun mulai menunduk pelan. Tier 7+ dapat satu notifikasi tenang.
 
 STATE 3
-Awake — Bangun
-Hari-H. Berdiri, animasi idle penuh. Kartu task naik ke atas daftar dengan sendirinya.
+Perlu Disiram — Berdiri tegak
+Hari-H. Animasi idle penuh. Kartu task naik ke atas daftar dengan sendirinya.
 
 STATE 4
-Rampage — Mengamuk
-Lewat deadline. Keluar dari kartu, pindah ke layar utama. Perilakunya sesuai tabel tier di atas.
+Layu — Keluar dari kartu
+Lewat deadline. Keluar dari kartu, pindah ke kebun utama beranda. Perilakunya sesuai tabel tier di atas.
 
 STATE 5
-Feral — Liar
+Mengering — Kekeringan menjalar
 Telat lebih dari 3 hari. Mulai menggerogoti EXP Gains terkait, −1%/hari, maksimal −15% dari task itu. Bisa dimatikan lewat setelan.
 
 Jatah gangguan harian
 Ini yang akan menentukan app-mu dipakai atau di-uninstall di minggu kedua. Aturannya:
 
-Maksimal 6 notifikasi monster per hari, apa pun jumlah task menunggak.
-Kalau jatahnya penuh, yang lolos adalah tier tertinggi; sisanya digabung jadi satu ringkasan: “4 monster lain sedang menunggu.”
+Maksimal 6 notifikasi kebun per hari, apa pun jumlah task menunggak.
+Kalau jatahnya penuh, yang lolos adalah tier tertinggi; sisanya digabung jadi satu ringkasan: “4 tanaman lain sedang menunggu disiram.”
 Jam tenang yang bisa diatur. Hanya tier 9–10 boleh menembusnya, dan hanya kalau user mengizinkan secara eksplisit.
-Alarm layar penuh (USE_FULL_SCREEN_INTENT) cuma untuk task Terjadwal pada jam mulainya persis — ini pemakaian yang sah di mata Play Store karena setara alarm/pengingat waktu-tepat. Task tier 7+ yang cuma terlewat (state Mengamuk/Liar tanpa jam pasti) pakai notifikasi heads-up prioritas tinggi, bukan layar penuh. Google Play sejak Android 14 membatasi ketat siapa yang boleh pakai layar penuh dan menanyakan alasannya lewat Formulir Deklarasi Izin di Play Console — kalau dipakai sembarangan untuk “task telat” biasa, risikonya app ditolak saat review.
-Mengalahkan monster
-Centang task → animasi kekalahan pendek (600–900 ms, bisa dilewati) → EXP terbang ke ikon Gains yang bersangkutan → bar Gains terisi.
+Alarm layar penuh (USE_FULL_SCREEN_INTENT) cuma untuk task Terjadwal pada jam mulainya persis — ini pemakaian yang sah di mata Play Store karena setara alarm/pengingat waktu-tepat. Keputusan final, bukan lagi trade-off terbuka: supaya tetap terasa darurat meski wujudnya sekarang tanaman (bukan monster yang mengaung), layar alarm ini selalu memakai vignette gelap yang tegas di atas ilustrasi tanaman, tidak cuma mengandalkan animasi layu yang lembut — estetika kebun tidak boleh melunakkan alarm task yang sudah genting. Task tier 7+ yang cuma terlewat (state Layu/Mengering tanpa jam pasti) tetap pakai notifikasi heads-up prioritas tinggi, bukan layar penuh. Google Play sejak Android 14 membatasi ketat siapa yang boleh pakai layar penuh dan menanyakan alasannya lewat Formulir Deklarasi Izin di Play Console — kalau dipakai sembarangan untuk “task telat” biasa, risikonya app ditolak saat review.
+Memanen tanaman
+Centang task → animasi panen pendek (600–900 ms, bisa dilewati — kuncup mekar sekejap lalu dipetik) → EXP terbang ke ikon Gains yang bersangkutan → bar Gains terisi.
 
-Monster yang kalah masuk Bestiary. Tiap spesies punya penghitung: “Titan — dikalahkan 3×”. Ini yang mengubah riwayat task dari daftar membosankan jadi sesuatu yang ingin dilihat lagi.
+Tanaman yang dipanen masuk Almanak Kebun. Tiap spesies punya penghitung: “Pohon Purba — dipanen 3×”. Ini yang mengubah riwayat task dari daftar membosankan jadi sesuatu yang ingin dilihat lagi.
 
-Membatalkan task juga sah — monsternya “dilepaskan”, bukan dikalahkan. Tidak ada EXP, tidak ada penalti. Menghukum orang karena membatalkan hal yang memang sudah tidak relevan itu keliru.
+Membatalkan task juga sah — tanamannya “dilepas ke alam”, bukan dipanen. Tidak ada EXP, tidak ada penalti. Menghukum orang karena membatalkan hal yang memang sudah tidak relevan itu keliru.
 
 07 — Ekonomi
 Rumus EXP dan level Gains
-Semua angka di bawah ini sengaja dibuat mudah diubah. Taruh di satu file konstanta, jangan disebar ke mana-mana — kamu akan menyetelnya berkali-kali setelah dipakai sendiri seminggu.
+Semua angka di bawah ini sengaja dibuat mudah diubah, dan tidak berubah sama sekali dari draf monster — pergantian ke tanaman murni soal wujud, bukan angka. Taruh di satu file konstanta, jangan disebar ke mana-mana — kamu akan menyetelnya berkali-kali setelah dipakai sendiri seminggu.
 
 // ---- 1. EXP dasar (dampak lebih berharga dari penderitaan)
 base = (dampak * 1.0) + (kesulitan * 0.7)        // 0 .. 170
@@ -216,16 +219,16 @@ Tanpa itu, orang akan menumpuk EXP di Karya sampai level 30 sementara Raga terti
 
 Dengan itu, layar utama bisa berkata: “Ikatan tertinggal 4 level. Task apa pun di sana dapat +15% minggu ini.” Ini satu-satunya fitur yang tidak dipunyai task manager lain, dan pantas jadi bahan promosi utama.
 
-Tampilkan keenam Gains sebagai radar chart di layar utama. Bentuk yang penyok langsung memberi tahu segalanya tanpa satu kata pun.
+Tampilkan Gains sebagai radar chart di layar utama — enam bawaan dulu, lalu Gain tambahan buatan sendiri (bagian 03) menyusul di sisi yang sama. Bentuk yang penyok langsung memberi tahu segalanya tanpa satu kata pun.
 
 08 — Waktu
 Tiga jenis task, satu form
-Jenis	Input waktu	Pengingat	State monster
-Lentur	Hanya estimasi durasi (menit). Tanpa tanggal.	Tidak ada, kecuali dijadwalkan belakangan.	Tidur terus sampai user memberinya tanggal.
-Bertenggat	Estimasi durasi + tanggal jatuh tempo.	Notifikasi biasa, mengikuti jatah harian.	Siklus penuh: Tidur → Menggeliat → Bangun → Mengamuk.
-Terjadwal	Tanggal + jam mulai, durasi, opsi pengulangan.	Alarm tepat waktu. Layar penuh untuk tier 7+.	Bangun tepat pada jam mulai, bukan tengah malam.
+Jenis	Input waktu	Pengingat	Kondisi tanaman
+Lentur	Hanya estimasi durasi (menit). Tanpa tanggal.	Tidak ada, kecuali dijadwalkan belakangan.	Berakar terus sampai user memberinya tanggal.
+Bertenggat	Estimasi durasi + tanggal jatuh tempo.	Notifikasi biasa, mengikuti jatah harian.	Siklus penuh: Berakar → Mulai Haus → Perlu Disiram → Layu.
+Terjadwal	Tanggal + jam mulai, durasi, opsi pengulangan.	Alarm tepat waktu. Layar penuh untuk tier 7+.	Perlu disiram tepat pada jam mulai, bukan tengah malam.
 Sesi fokus
-Tombol Mulai di detail task menjalankan timer di notifikasi permanen. Selama timer jalan, monsternya “terkurung” — animasinya berubah jadi terikat. Umpan balik visual yang gratis tapi terasa mahal.
+Tombol Mulai di detail task menjalankan timer di notifikasi permanen. Selama timer jalan, tanamannya masuk “rumah kaca” — animasinya berubah jadi terlindung di bawah kubah kaca kecil, tenang tumbuh tanpa gangguan. Umpan balik visual yang gratis tapi terasa mahal.
 
 Simpan estimasi dan waktu aktual. Setelah 20–30 task, app bisa berkata: “Kamu rata-rata butuh 1,8× lebih lama dari perkiraanmu.” Itu insight yang benar-benar berguna, dan datanya sudah ada tanpa usaha tambahan.
 
@@ -243,27 +246,27 @@ Tombol Google besar di atas, opsi email di bawahnya. Tidak memaksa login di perc
 
 01
 Beranda
-Radar chart 6 Gains, level & EXP, task hari ini, dan monster yang sedang mengamuk berkeliaran di area kosong.
+Radar chart Gains (enam bawaan, plus tambahan manual kalau ada), level & EXP, task hari ini, dan tanaman yang layu menunggu disiram di kebun kosong.
 
 02
 Daftar task
-Saring per Gains, tier, atau tanggal. Diurutkan otomatis oleh Prioritas Otomatis (bagian 12): yang mengamuk di atas, yang tidur di bawah.
+Saring per Gains, tier, atau tanggal. Diurutkan otomatis oleh Prioritas Otomatis (bagian 12): yang paling layu di atas, yang masih berakar tenang di bawah.
 
 03
 Buat task
-Dua slider dengan preview monster hidup, pemilih Gains, jenis waktu. Layar terpenting di app.
+Dua slider dengan preview tanaman tumbuh hidup, pemilih Gains, jenis waktu. Layar terpenting di app.
 
 04
 Detail task
-Monster berukuran besar dengan bar HP dari checklist subtask, timer fokus, catatan, riwayat penjadwalan ulang.
+Tanaman berukuran besar dengan bar Pertumbuhan dari checklist subtask, timer fokus, catatan, riwayat penjadwalan ulang.
 
 05
 Detail Gains
-Kurva level, EXP masuk 30 hari terakhir, task yang paling banyak menyumbang.
+Kurva level, EXP masuk 30 hari terakhir, task yang paling banyak menyumbang. Termasuk Gain tambahan buatan sendiri.
 
 06
-Bestiary
-Sepuluh spesies, berapa kali dikalahkan, rekor terbaik. Alasan untuk kembali membuka app.
+Almanak Kebun
+Sepuluh spesies tanaman, berapa kali dipanen, rekor terbaik. Alasan untuk kembali membuka app.
 
 07
 Statistik
@@ -279,10 +282,10 @@ Task boleh dipecah jadi checklist di dalam dirinya sendiri — bukan jadi task b
 
 Bagaimana subtask bekerja
 Task manapun boleh punya daftar subtask sederhana: judul + centang, tersusun dan bisa diurut ulang dengan seret.
-Monster di layar detail task tampil dengan bar HP di bawahnya. Tiap subtask dicentang, HP-nya berkurang — centang subtask terakhir, monsternya tinggal senggol.
+Tanaman di layar detail task tampil dengan bar Pertumbuhan di bawahnya. Tiap subtask dicentang, bar-nya bertambah — centang subtask terakhir, tanamannya siap dipanen.
 EXP tetap dibayar satu kali, saat task induk ditandai selesai — bukan per subtask. Kalau semua subtask sudah tercentang, app menyodorkan satu tombol: “Semua langkah selesai — tandai task ini selesai?”
 Yang sengaja tidak dibuat
-Subtask tidak punya kesulitan, dampak, deadline, atau Gains sendiri. Begitu subtask boleh dijadwalkan dan diberi skor sendiri, dia jadi task penuh dengan monster sendiri — dan satu “task besar” akan meledak jadi rombongan monster kecil yang membingungkan, bukan satu monster yang perlahan melemah. Satu task, satu monster, tetap berlaku.
+Subtask tidak punya kesulitan, dampak, deadline, atau Gains sendiri. Begitu subtask boleh dijadwalkan dan diberi skor sendiri, dia jadi task penuh dengan tanaman sendiri — dan satu “task besar” akan meledak jadi rombongan tanaman kecil yang membingungkan, bukan satu tanaman yang perlahan tumbuh besar. Satu task, satu tanaman, tetap berlaku.
 
 11 — Lokalisasi
 Dua bahasa, satu pengalaman
@@ -291,27 +294,27 @@ Bahasa Indonesia dan English. Default-nya ikut setelan bahasa HP — tapi pemili
 Elemen	Indonesia	English	Diterjemahkan?
 UI, label, notifikasi	“Tandai selesai”	“Mark as done”	Ya — via strings.xml / values-en
 Nama Gains	Raga, Nalar, Karya…	Body, Mind, Craft…	Ya — makna harus tersampaikan
-Nama tier monster	Speck, Goblin, Titan	Speck, Goblin, Titan	Tidak — nama diri, seperti nama Pokémon
+Nama tier tanaman	Tunas, Semak, Pohon Purba	Sprout, Bush, Ancient Tree	Ya — beda dari nama monster lama (Speck, Goblin, Titan sengaja tidak diterjemahkan karena nama diri fiksi, seperti nama Pokémon). Tunas dan Pohon Purba adalah kata benda umum yang bermakna — dibiarkan tidak diterjemahkan di UI Inggris, orangnya cuma melihat kata asing tanpa arti, dan itu merusak inti nilai jual metafora ini: jenjang yang terbaca sendiri tanpa penjelasan.
 Tanggal & angka	29 Agu 2026	Aug 29, 2026	Ya — via Locale, bukan concat string manual
 Implementasi
 Pakai AppCompatDelegate.setApplicationLocales() (per-app language bawaan Android 13+, di-backport AndroidX Core ke versi lebih lama). Nilai awalnya dibaca dari Locale sistem saat pertama buka — lalu sebuah chip kecil “ID / EN” muncul di pojok Beranda tepat setelah login pertama, sekali ganti langsung tersimpan ke DataStore dan tidak ditanyakan lagi. Jangan lupa: listing Play Store-nya sendiri juga perlu ditulis dua kali di Play Console — judul, deskripsi, dan screenshot untuk lokal id dan en-US terpisah.
 
 12 — Prioritas otomatis
 Yang paling mendesak, paling atas
-Daftar task tidak diurutkan manual oleh user. Urutannya konsekuensi langsung dari sistem dua-sumbu di bagian 02: state monster menang atas tier, karena task yang sedang mengamuk lebih genting daripada task berat yang masih tidur.
+Daftar task tidak diurutkan manual oleh user. Urutannya konsekuensi langsung dari sistem dua-sumbu di bagian 02: kondisi kesegaran menang atas tier, karena task yang sedang layu lebih genting daripada task berat yang masih berakar tenang.
 
 // Setiap task diberi satu angka, daftar diurutkan menurun
-bobotState = { liar: 5, mengamuk: 4, bangun: 3, menggeliat: 2, tidur: 1 }
+bobotState = { mengering: 5, layu: 4, perluDisiram: 3, mulaiHaus: 2, berakar: 1 }
 
 prioritas = bobotState[state] * 1000 + tier * 10
 // seri — task dengan prioritas sama diurutkan oleh:
 //   tenggat lebih dekat dulu, tanpa tenggat taruh paling akhir
-Task	Tier	State	Prioritas	Posisi
-Bayar tagihan listrik	2	Mengamuk	4020	1
-Presentasi klien besok	7	Bangun	3070	2
-Servis motor	4	Menggeliat	2040	3
-Belajar bahasa Jepang	10	Tidur	1100	4
-Titan-nya belajar Jepang tetap di posisi buncit selama dia masih tidur — persis alasan kenapa bagian 02 memisahkan dua sumbu ini sejak awal. Tidak ada opsi “pin manual” di v1 secara sengaja: begitu user bisa menimpa urutan ini dengan tangan, dia akan menimpanya dengan bias yang sama seperti to-do list biasa, dan seluruh nilai dari fitur ini hilang.
+Task	Tier	Kondisi	Prioritas	Posisi
+Bayar tagihan listrik	2	Layu	4020	1
+Presentasi klien besok	7	Perlu Disiram	3070	2
+Servis motor	4	Mulai Haus	2040	3
+Belajar bahasa Jepang	10	Berakar	1100	4
+Pohon Purba-nya belajar Jepang tetap di posisi buncit selama dia masih berakar tenang — persis alasan kenapa bagian 02 memisahkan dua sumbu ini sejak awal. Tidak ada opsi “pin manual” di v1 secara sengaja: begitu user bisa menimpa urutan ini dengan tangan, dia akan menimpanya dengan bias yang sama seperti to-do list biasa, dan seluruh nilai dari fitur ini hilang.
 
 13 — Akun & masuk
 Masuk dengan Google, atau email + OTP
@@ -344,13 +347,13 @@ Room + Flow — cache lokal, offline-first. Setelah login, Firestore jadi sumber
 Firebase Auth + Credential Manager API — Google Sign-In lewat Credential Manager (bukan GoogleSignInClient lama yang sudah deprecated), plus email/password.
 Cloud Functions + Firestore — generate & verifikasi kode OTP email, dan jadi tempat sinkron Task/Gain/ExpLedger lintas perangkat.
 Hilt untuk dependency injection.
-AlarmManager untuk alarm tepat waktu, WorkManager untuk pemeriksaan state monster harian dan sinkron latar belakang ke Firestore.
+AlarmManager untuk alarm tepat waktu, WorkManager untuk pemeriksaan kondisi tanaman harian dan sinkron latar belakang ke Firestore.
 DataStore untuk preferensi, termasuk pilihan bahasa.
-Ilustrasi statis (AI) + animasi prosedural Compose menggantikan rencana 50 Lottie penuh — lihat kartu di sebelah untuk alasannya. Lottie tetap dipakai, tapi hanya untuk efek kecil yang murni gerak abstrak (partikel, kilau, asap) yang tidak butuh gambar sumber.
+Tanaman digambar penuh lewat kode, bukan lewat AI. Ini penyederhanaan nyata dibanding rencana monster: prototipe konsep sudah membuktikan teknik cluster-kanopi (blob bayangan di belakang, blob isi warna utama, blob highlight kecil di atas, semuanya lingkaran/elips sederhana dengan jitter berbibit-acak, plus batang meruncing dua-nada untuk efek silinder) menghasilkan 10 tier + 5 kondisi kesegaran yang konsisten satu sama lain, tanpa satu pun aset gambar dari luar. Lottie tetap dipakai, tapi hanya untuk efek kecil yang murni gerak abstrak (partikel, kilau, asap) yang tidak butuh gambar sumber.
 MVVM dengan pemisahan data / domain / ui. Rumus EXP dan tier hidup di domain — murni, tanpa dependensi Android, dan mudah dites.
 Entitas Room
 Gain(id, ownerId, nama, warna, ikon,
-     totalExp, level)
+     totalExp, level, bawaan)
 
 Task(id, ownerId, judul, catatan,
      kesulitan, dampak, tier,
@@ -365,34 +368,31 @@ Subtask(id, taskId, judul,
 
 TaskGain(taskId, gainId, persen)
 
-Monster(taskId, spesies, state,
-        terakhirMengganggu,
-        jumlahGangguan)
+Tanaman(taskId, spesies, kondisi,
+        terakhirDiingatkan,
+        jumlahPengingat)
 
 ExpLedger(id, ownerId, gainId, taskId,
           jumlah, alasan, waktu)
 ExpLedger itu wajib, bukan opsional. Jangan hanya menyimpan total EXP di tabel Gain — simpan setiap transaksi. Tanpa itu kamu tidak bisa membatalkan penyelesaian task, membangun grafik, atau memperbaiki bug perhitungan tanpa merusak data orang.
 
-ownerId baru muncul karena ada login (lihat bagian 13). diperbaruiPada dipakai untuk sinkronisasi last-write-wins ke Firestore — cukup untuk kasus satu akun dipakai di satu HP pada satu waktu, tidak perlu resolusi konflik yang rumit.
+ownerId baru muncul karena ada login (lihat bagian 13). diperbaruiPada dipakai untuk sinkronisasi last-write-wins ke Firestore — cukup untuk kasus satu akun dipakai di satu HP pada satu waktu, tidak perlu resolusi konflik yang rumit. Kolom bawaan di Gain membedakan enam Gain fondasi dari Gain tambahan buatan user (bagian 03) — dipakai UI untuk selalu menaruh yang bawaan lebih dulu di radar chart.
 
-Soal art monster pakai AI
-Bisa — tapi aku sendiri tidak bisa menggambarnya untukmu, alat yang kupunya di sini tidak termasuk penghasil gambar. Yang bisa kubantu: menulis prompt yang konsisten untuk 10 monster, dan menata ulang cara animasinya dibuat supaya cocok dengan apa yang sebenarnya dihasilkan alat AI gambar.
+Render prosedural, langkah demi langkah
+Teknik yang sudah divalidasi di prototipe konsep, tinggal dipindah ke Compose Canvas (drawCircle/drawPath, bukan lagi SVG):
 
-Generator gambar (Midjourney, SDXL, DALL·E, Ideogram) menghasilkan ilustrasi diam, bukan file Lottie berpenggerak. Jadi rencana “50 animasi Lottie” di draf pertama diganti jalur yang lebih realistis dikerjakan sendiri:
-
-1 ilustrasi statis per tier (10 total, bukan 50) dengan latar transparan.
-Kunci gaya di semua 10 generasi — pakai fitur style-reference (mis. --sref Midjourney) atau img2img dari satu sketsa dasar, supaya Speck dan Titan terasa satu keluarga, bukan sepuluh gaya yang berbeda-beda.
-Hidupkan lewat animasi prosedural di Compose, bukan rig tangan: napas (scale naik-turun pelan), kedip (ganti ke 1 varian mata-tertutup sesekali), oleng/getar saat Mengamuk, desaturasi warna saat Wraith — semua ini transform & color-filter murni kode di atas satu gambar diam, tidak perlu file animasi tambahan sama sekali.
-Contoh prompt yang bisa dipakai ulang untuk tier lain, tinggal ganti nama & warnanya:
-“Goblin, mobile game mascot character, flat vector illustration, thick clean outline, chibi proportions, big expressive eyes, three-quarter view, single #94B348 accent color, transparent background, character-sheet style, consistent line weight”
-
+Kanopi = cluster blob. Satu elips bayangan gelap di belakang untuk kedalaman, beberapa lingkaran isi warna utama saling tumpang-tindih membentuk siluet bulat, dua lingkaran kecil lebih terang di atas untuk kesan cahaya. Jumlah blob & radius kanopi naik mengikuti tier (dari 3 blob kecil di Kecambah sampai 12 blob di Pohon Purba).
+Batang = trapesium dua-nada. Separuh kiri lebih gelap, separuh kanan lebih terang, meruncing dari lebar di pangkal ke sempit di kanopi — kesan silinder tanpa perlu gradient.
+Kesegaran = interpolasi warna + posisi. Warna kanopi bergeser dari warna Gain menuju cokelat kering sesuai kondisi; blob yang lebih jauh dari tengah kanopi “menunduk” lebih jauh saat kondisinya Layu/Mengering.
+Tier 8+ dapat pohon satelit kecil di sampingnya, dirender lewat fungsi kanopi yang sama dengan skala lebih kecil — bukan aset terpisah.
+1 ilustrasi statis per tier (opsional, untuk listing Play Store & marketing) tetap bisa digenerate AI belakangan sebagai referensi, tapi app runtime tidak bergantung padanya sama sekali.
 15 — Urutan pengerjaan
 Roadmap
 Urutannya penting: setiap fase harus menghasilkan sesuatu yang benar-benar bisa kamu pakai sendiri sebelum lanjut ke fase berikutnya.
 
 Fase 1
 Rangka
-CRUD task + subtask, dua slider, perhitungan tier & prioritas otomatis, enam Gains, EXP dan level, database Room dengan ownerId anonim dari Firebase Auth sejak awal — supaya tidak perlu migrasi skema besar-besaran nanti di Fase 2. Monsternya masih placeholder statis — emoji pun cukup. Tujuannya membuktikan angka-angkanya terasa benar sebelum sepeser pun dihabiskan untuk animasi.
+CRUD task + subtask, dua slider, perhitungan tier & prioritas otomatis, enam Gains (plus dukungan skema untuk Gain tambahan), EXP dan level, database Room dengan ownerId anonim dari Firebase Auth sejak awal — supaya tidak perlu migrasi skema besar-besaran nanti di Fase 2. Tanamannya masih placeholder statis — emoji pun cukup. Tujuannya membuktikan angka-angkanya terasa benar sebelum sepeser pun dihabiskan untuk render.
 
 Fase 2
 Waktu & Akun
@@ -400,11 +400,11 @@ Tenggat, task terjadwal, AlarmManager, notifikasi, jatah gangguan harian, jam te
 
 Fase 3
 Nyawa
-Sepuluh ilustrasi monster (AI, gaya terkunci konsisten), animasi prosedural napas/kedip/oleng di Compose, bar HP subtask, preview real-time di slider, animasi kekalahan, monster berkeliaran di beranda. Ini fase termahal sekaligus paling menyenangkan. Kerjakan tier 1, 5, dan 10 lebih dulu untuk memastikan gaya visualnya konsisten dari ujung ke ujung sebelum generate tujuh sisanya.
+Render prosedural cluster-kanopi di Compose Canvas untuk 10 tier × 5 kondisi kesegaran (teknik sudah divalidasi lewat prototipe konsep — bukan lagi 10 ilustrasi AI yang perlu dijaga konsistensi gayanya), animasi goyang tertiup angin, layu bertahap, daun berguguran saat Layu/Mengering, bar Pertumbuhan subtask, preview real-time di slider, animasi panen, kebun tanaman menunggu di beranda. Fase ini jadi jauh lebih murah dan lebih cepat dibanding rencana monster berbasis AI — tidak ada lagi risiko sepuluh generasi AI terasa beda gaya satu sama lain.
 
 Fase 4
 Kedalaman
-Bestiary, statistik, akurasi estimasi, streak, pengali keseimbangan, radar chart, task berulang, terjemahan English lengkap, hapus akun, ekspor data.
+Almanak Kebun, statistik, akurasi estimasi, streak, pengali keseimbangan, radar chart (termasuk Gain tambahan), task berulang, terjemahan English lengkap (termasuk nama tier tanaman, lihat bagian 11), hapus akun, ekspor data.
 
 Fase 5
 Rilis
@@ -412,26 +412,26 @@ Kebijakan Privasi, formulir Data Safety, verifikasi layar consent OAuth Google, 
 
 Nanti
 Setelah dipakai sebulan
-Widget layar utama, integrasi kalender, skin pack Nusantara, kolaborasi. Jangan sentuh apa pun di sini sampai kamu benar-benar memakai app-nya sendiri selama empat minggu penuh.
+Widget layar utama, integrasi kalender, skin pack Nusantara atau Musim, kolaborasi. Jangan sentuh apa pun di sini sampai kamu benar-benar memakai app-nya sendiri selama empat minggu penuh.
 
 16 — Spesifikasi terkunci
-Delapan keputusan, sudah dikonfirmasi
+Sebelas keputusan, sudah dikonfirmasi
 Semua pertanyaan di draf sebelumnya sudah kamu jawab. Ini rekapnya, supaya jadi satu referensi tunggal saat mulai membangun — tidak perlu bolak-balik ke pesan-pesan sebelumnya.
 
 01
 Enam Gains — final. Raga, Nalar, Karya, Harta, Ikatan, Jiwa. Lihat bagian 03.
 
 02
-Nama tier — final. Speck → Titan dipakai sebagai set utama. Set Nusantara (Debu→Kala) dan set kosmik disimpan sebagai skin pack untuk dirilis belakangan, bukan dihapus — struktur datanya (tier 1–10) tetap sama, cuma nama & ilustrasinya yang diganti. Lihat bagian 05.
+Nama tier — final. Tunas → Pohon Purba dipakai sebagai set utama untuk tanaman, menggantikan set monster (Speck → Titan) dari draf sebelumnya. Set Nusantara (Semai→Rimba Purba) dan set Musim disimpan sebagai skin pack untuk dirilis belakangan, bukan dihapus — struktur datanya (tier 1–10) tetap sama, cuma nama & warnanya yang diganti. Lihat bagian 05.
 
 03
-EXP menyusut — dipakai sesuai default. −1% EXP/hari saat task masuk state Liar, dibatasi maksimal −15% dari task itu, dan bisa dimatikan lewat Setelan. Lihat bagian 06.
+EXP menyusut — dipakai sesuai default. −1% EXP/hari saat task masuk kondisi Mengering, dibatasi maksimal −15% dari task itu, dan bisa dimatikan lewat Setelan. Lihat bagian 06.
 
 04
 Agresivitas notifikasi — ditentukan mengikuti kebijakan Play Store. Maksimal 6 notifikasi/hari, jam tenang bisa diatur, dan alarm layar penuh dibatasi hanya untuk task Terjadwal pada jam mulainya — bukan untuk task yang sekadar terlambat — karena Android 14+ mensyaratkan alasan alarm/waktu-tepat untuk izin ini. Lihat bagian 06 & 08.
 
 05
-Seni monster — digarap dengan AI, animasinya prosedural. 10 ilustrasi statis (bukan 50 Lottie) dengan gaya visual dikunci lewat style-reference, dihidupkan lewat animasi napas/kedip/oleng di Compose. Panduan prompt & alasannya ada di bagian 14.
+Seni tanaman — digambar penuh lewat kode. Bukan lagi ilustrasi AI statis seperti rencana monster di draf sebelumnya: render prosedural cluster-kanopi di Compose Canvas, sudah divalidasi lewat prototipe konsep, mencakup 10 tier × 5 kondisi kesegaran tanpa aset gambar dari luar. Detail teknik ada di bagian 14.
 
 06
 Login — wajib. Tidak ada mode tamu; layar Masuk/Daftar jadi gerbang pertama sejak buka app pertama kali. Lihat bagian 13.
@@ -440,4 +440,13 @@ Login — wajib. Tidak ada mode tamu; layar Masuk/Daftar jadi gerbang pertama se
 OTP — lewat email saja, bukan SMS. Dikirim via Cloud Function + penyedia email transaksional, bukan fitur SMS Firebase Phone Auth yang berbayar per pesan. Lihat bagian 13.
 
 08
-Bahasa — ikut setelan HP, dengan pemilih di layar utama. Default dibaca dari Locale sistem saat instal pertama; chip “ID / EN” muncul di Beranda tepat setelah login pertama supaya gampang dikoreksi tanpa masuk Setelan. Lihat bagian 11.
+Bahasa — ikut setelan HP, dengan pemilih di layar utama. Default dibaca dari Locale sistem saat instal pertama; chip “ID / EN” muncul di Beranda tepat setelah login pertama supaya gampang dikoreksi tanpa masuk Setelan. Beda dari nama tier monster lama, nama tier tanaman sekarang ikut diterjemahkan karena maknanya kata benda umum, bukan nama diri fiksi. Lihat bagian 11.
+
+09
+Metafora inti — final. Monster diganti tanaman/kebun supaya penundaan terasa seperti rasa sayang dan tanggung jawab, bukan dikejar rasa takut. Mekanik dua sumbu dan seluruh rumus di bagian 07 & 12 tidak berubah sama sekali dari draf sebelumnya — yang direka ulang cuma istilah di bagian 05 (nama tier), 06 (siklus hidup & notifikasi), dan 14 (cara render visual).
+
+10
+Gains tambahan manual — final. Enam Gains dasar tidak berubah dan selalu tampil lebih dulu. Di atasnya, user bisa menambah Gain sendiri (maksimal 4), memakai rumus EXP yang sama. Lihat bagian 03.
+
+11
+Alarm mendesak tetap tegas — final. Alarm layar penuh untuk task Terjadwal tier 7+ tetap memakai vignette gelap yang tegas di atas ilustrasi tanaman, tidak dilunakkan oleh estetika kebun yang lembut. Lihat bagian 06.
